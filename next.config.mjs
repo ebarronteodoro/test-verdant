@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  reactStrictMode: true, // Activa el modo estricto para detectar problemas en desarrollo
+}
 
-export default nextConfig;
+export default nextConfig
