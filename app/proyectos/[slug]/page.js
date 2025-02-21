@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import '../../styles/details.css'
 import slugify from 'slugify'
 
-// Datos de los proyectos
 const projects = [
   {
     id: 'soil',
@@ -60,7 +59,6 @@ const projects = [
   }
 ]
 
-// Generar rutas estáticas en App Router
 export async function generateStaticParams () {
   return projects.map(project => ({
     slug: `departamentos-en-venta-${slugify(project.location, {
@@ -70,13 +68,11 @@ export async function generateStaticParams () {
   }))
 }
 
-// Página del proyecto
 export default async function ProjectPage ({ params }) {
   const { slug } = await params
 
-  // Extraer el nombre del proyecto desde la URL
   const slugParts = slug.split('-')
-  const projectName = slugParts.slice(-1)[0] // Último elemento es el nombre del proyecto
+  const projectName = slugParts.slice(-1)[0]
 
   const project = projects.find(
     p => slugify(p.name, { lower: true, strict: true }) === projectName
@@ -88,12 +84,12 @@ export default async function ProjectPage ({ params }) {
 
   return (
     <Layout>
-      <section className='intro-section margin-top-reference'>
+      <section className='intro-section'>
         <picture>
           {project.id === 'soil' ? (
-            <img loading='lazy' src='/SOIL/Terraza.jpg' alt='Terraza de Soil' />
+            <Image width={1250} priority height={240} src='/SOIL/Terraza.jpg' alt='Terraza de Soil' />
           ) : project.id === 'seed' ? (
-            <img loading='lazy' src='/banner-seed.jpg' alt='Banner de Seed' />
+            <Image width={1250} priority height={240} src='/banner-seed.jpg' alt='Banner de Seed' />
           ) : null}
         </picture>
 
@@ -114,13 +110,12 @@ export default async function ProjectPage ({ params }) {
 
           <div className='logo'>
             <picture>
-              <img src={project.logo} alt={`Logo de ${project.title}`} />
+              <Image width={300} height={100} priority src={project.logo} alt={`Logo de ${project.title}`} />
             </picture>
           </div>
 
           <div className='info'>
             <div className='rows'>
-              {/* Estado del proyecto */}
               <div className='status'>
                 <h3>{project.status}</h3>
               </div>
@@ -133,7 +128,6 @@ export default async function ProjectPage ({ params }) {
                     height='24'
                     viewBox='0 0 24 24'
                     fill='currentColor'
-                    className='icon icon-tabler icons-tabler-filled icon-tabler-map-pin'
                   >
                     <path d='M0 0h24v24H0z' fill='none' />
                     <path d='M18.364 4.636a9 9 0 0 1 .203 12.519l-.203.21-4.243 4.242a3 3 0 0 1-4.097.135l-.144-.135-4.244-4.243A9 9 0 0 1 18.364 4.636zM12 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z' />
@@ -180,17 +174,16 @@ export default async function ProjectPage ({ params }) {
                   <p>
                     <strong>Desde</strong>
                     <br />
-                    {project.minSize}m²
+                    {project.minSize}m<sup>2</sup>
                   </p>
                   <p>
                     <strong>Hasta</strong>
                     <br />
-                    {project.maxSize}m²
+                    {project.maxSize}m<sup>2</sup>
                   </p>
                 </div>
               </div>
 
-              {/* Precio */}
               <div className='pricing'>
                 <div>
                   <p>
@@ -208,7 +201,7 @@ export default async function ProjectPage ({ params }) {
                 <strong>FINANCIA:</strong>
               </p>
               <picture>
-                <img src='/details/logo-interbank.webp' alt='Logo Banco' />
+                <Image width={200} height={50} priority src='/details/logo-interbank.webp' alt='Logo Banco' />
               </picture>
             </div>
           </div>

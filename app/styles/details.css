@@ -292,6 +292,7 @@ main {
               width: 90%;
               max-width: 90%;
               margin: 0 auto;
+              object-fit: contain;
             }
           }
         }
