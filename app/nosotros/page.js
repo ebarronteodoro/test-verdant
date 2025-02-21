@@ -17,22 +17,6 @@ export const metadata = {
     'nosotros, equipo, pilares, certificaciones, socios estratégicos, verdant'
 }
 
-// const NotificationSection = dynamic(
-//   () => import('../components/NotificationSection'),
-//   { ssr: false }
-// )
-// const CircularProgressSection = dynamic(
-//   () => import('../components/CircularProgressSection'),
-//   { ssr: false }
-// )
-// const CertificacionesSection = dynamic(
-//   () => import('../components/CertificacionesSection'),
-//   { ssr: false }
-// )
-// const TeamSection = dynamic(() => import('../components/TeamSection'), {
-//   ssr: false
-// })
-
 export default function Home () {
   return (
     <Layout>
