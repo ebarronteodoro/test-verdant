@@ -1,0 +1,140 @@
+.walinkButton {
+  display: flex;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.3));
+  animation: pulse-animation 2s infinite;
+}
+
+.walinkButton:hover a img {
+  transform: scale(1.05);
+}
+
+.walinkButton:hover a svg {
+  transform: scale(1.05);
+}
+
+.walinkButton a {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.textOverlay {
+  position: absolute;
+  top: 0;
+  max-width: 400px;
+  z-index: 11;
+  height: 40px;
+  padding: 0 1rem;
+  right: 100%;
+  background: #e0eaf3;
+  border-radius: 1000px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  position: absolute;
+  z-index: 2;
+  bottom: -4px;
+  rotate: 47deg;
+  border-left: 9px solid transparent;
+  right: 2px;
+  left: auto;
+  border-left-color: #e0eaf3;
+}
+
+.ctaText {
+  float: left;
+  width: 100%;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #193e35;
+  font-weight: 700;
+  font-size: clamp(0.75rem, 0.9vw, 2rem);
+}
+
+.walinkButton a img {
+  width: clamp(5rem, 5.1vw, 7rem) !important;
+  height: clamp(5rem, 5.1vw, 7rem) !important;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.walinkButton a::after {
+  content: '1';
+  width: 1.6rem;
+  height: 1.6rem;
+  background: #ed211d;
+  position: absolute;
+  top: 0.3rem;
+  right: -0.5rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.walinkButton.active a::after {
+  opacity: 1;
+}
+
+@keyframes pulse-animation {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(89, 206, 53, 0.5);
+    box-shadow: 0 0 rgba(88, 206, 53, 0.5);
+  }
+
+  100% {
+    -webkit-box-shadow: 0 0 0 20px rgba(88, 206, 53, 0);
+    box-shadow: 0 0 0 20px rgba(88, 206, 53, 0);
+  }
+}
+
+/* 📌 Media Queries */
+@media (min-width: 764px) and (max-width: 1400px) {
+  .walinkButton {
+    bottom: 1rem;
+    right: 1.5rem;
+  }
+
+  .walinkButton a svg {
+    width: 40px;
+    height: 40px;
+    padding: 0.3em;
+  }
+}
+
+@media (max-width: 764px) {
+  .walinkButton {
+    right: 1.2rem;
+    bottom: 1.3rem;
+  }
+
+  .walinkButton a img {
+    width: 40px;
+    height: 40px;
+  }
+}

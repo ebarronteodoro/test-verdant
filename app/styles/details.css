@@ -293,6 +293,7 @@ main {
               max-width: 90%;
               margin: 0 auto;
               object-fit: contain;
+              height: auto;
             }
           }
         }

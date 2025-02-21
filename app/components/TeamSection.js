@@ -45,7 +45,6 @@ export default function TeamSection () {
     if (!seeMoreBtn) return
 
     const toggleExpanded = () => {
-      console.log('click')
       setExpanded(prev => !prev)
     }
 

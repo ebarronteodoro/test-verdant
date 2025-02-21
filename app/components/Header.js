@@ -17,9 +17,6 @@ export default function Header () {
     const navLinks = document.querySelector('.nav')
 
     const handleMenuClick = (event) => {
-      console.log('click')
-      console.log(window.getComputedStyle(navLinks).display)
-
       event.preventDefault()
       if (window.getComputedStyle(navLinks).display === 'none') {
         navLinks.style.display = 'block'
