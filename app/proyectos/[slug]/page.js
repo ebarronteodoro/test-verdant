@@ -68,6 +68,40 @@ export async function generateStaticParams () {
   }))
 }
 
+export async function generateMetadata ({ params }) {
+  const { slug } = await params
+  const slugParts = slug.split('-')
+  const projectName = slugParts.slice(-1)[0]
+
+  const project = projects.find(
+    p => slugify(p.name, { lower: true, strict: true }) === projectName
+  )
+
+  if (!project) return notFound()
+
+  return {
+    title: `${
+      project.name.charAt(0).toUpperCase() + project.name.slice(1).toLowerCase()
+    } | Departamentos en Venta en ${
+      project.location.charAt(0).toUpperCase() +
+      project.location.slice(1).toLowerCase()
+    }`,
+    description: `Encuentra tu departamento ideal en ${project.location}. ${project.title} te ofrece departamentos desde ${project.price}. ¡Conoce más aquí!`
+    // openGraph: {
+    //   title: `Departamentos en venta en ${project.location} - ${project.name}`,
+    //   description: `Descubre el proyecto ${project.title} con opciones desde ${project.minSize}m² hasta ${project.maxSize}m². ¡Aprovecha nuestras promociones!`,
+    //   images: [
+    //     {
+    //       url: project.imgSrc,
+    //       width: 1200,
+    //       height: 630,
+    //       alt: `Imagen de ${project.title}`
+    //     }
+    //   ]
+    // }
+  }
+}
+
 export default async function ProjectPage ({ params }) {
   const { slug } = await params
 
@@ -87,9 +121,21 @@ export default async function ProjectPage ({ params }) {
       <section className='intro-section'>
         <picture>
           {project.id === 'soil' ? (
-            <Image width={1250} priority height={240} src='/SOIL/Terraza.jpg' alt='Terraza de Soil' />
+            <Image
+              width={1250}
+              priority
+              height={240}
+              src='/SOIL/Terraza.jpg'
+              alt='Terraza de Soil'
+            />
           ) : project.id === 'seed' ? (
-            <Image width={1250} priority height={240} src='/banner-seed.jpg' alt='Banner de Seed' />
+            <Image
+              width={1250}
+              priority
+              height={240}
+              src='/banner-seed.jpg'
+              alt='Banner de Seed'
+            />
           ) : null}
         </picture>
 
@@ -110,7 +156,13 @@ export default async function ProjectPage ({ params }) {
 
           <div className='logo'>
             <picture>
-              <Image width={300} height={100} priority src={project.logo} alt={`Logo de ${project.title}`} />
+              <Image
+                width={300}
+                height={100}
+                priority
+                src={project.logo}
+                alt={`Logo de ${project.title}`}
+              />
             </picture>
           </div>
 
@@ -201,7 +253,13 @@ export default async function ProjectPage ({ params }) {
                 <strong>FINANCIA:</strong>
               </p>
               <picture>
-                <Image width={200} height={50} priority src='/details/logo-interbank.webp' alt='Logo Banco' />
+                <Image
+                  width={200}
+                  height={50}
+                  priority
+                  src='/details/logo-interbank.webp'
+                  alt='Logo Banco'
+                />
               </picture>
             </div>
           </div>
