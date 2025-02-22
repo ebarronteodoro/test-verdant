@@ -2,6 +2,7 @@ import './styles/home.css' // ✅ Importamos su CSS propio
 import Layout from './Layouts/layout'
 import ProjectsSection from './components/ProjectsSection'
 import Link from 'next/link'
+import FilterSection from './components/FilterSection'
 
 export const metadata = {
   title: 'Verdânt Inmobiliaria',
@@ -13,21 +14,7 @@ export const metadata = {
 export default async function Home () {
   return (
     <Layout>
-      <aside className='search-section'>
-        <div className='search-section__container'>
-          <h2>
-            Elige tu depa <span>hoy</span>
-          </h2>
-          <select id='locationFilter'>
-            <option value='all'>Todos</option>
-            <option value='PUEBLO LIBRE'>Pueblo Libre</option>
-            <option value='SURCO'>Surco</option>
-            <option value='BARRANCO'>Barranco</option>
-            <option value='SAN MIGUEL'>San Miguel</option>
-          </select>
-          <button id='searchButton'>Buscar</button>
-        </div>
-      </aside>
+      <FilterSection />
 
       <section className='projects-section'>
         <ProjectsSection param={'index'} />
@@ -91,7 +78,11 @@ export default async function Home () {
         </h3>
         <div className='certificaciones-section__container'>
           <div className='certificado__1'>
-            <img src='/nosotros/asei-footer.png' className='item' alt='Logotipo Asei' />
+            <img
+              src='/nosotros/asei-footer.png'
+              className='item'
+              alt='Logotipo Asei'
+            />
             <span>
               Asociación De Empresas
               <br />
@@ -99,11 +90,19 @@ export default async function Home () {
             </span>
           </div>
           <div className='certificado__2'>
-            <img src='/nosotros/vivienda-footer.webp' className='item' alt='Logotipo Vivienda' />
+            <img
+              src='/nosotros/vivienda-footer.webp'
+              className='item'
+              alt='Logotipo Vivienda'
+            />
             <span>Mi Vivienda Verde</span>
           </div>
           <div className='certificado__3'>
-            <img src='/nosotros/edge-footer.png' className='item' alt='Logotipo Edge' />
+            <img
+              src='/nosotros/edge-footer.png'
+              className='item'
+              alt='Logotipo Edge'
+            />
             <span>Certificación Edge</span>
           </div>
         </div>

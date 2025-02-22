@@ -71,10 +71,15 @@ export async function generateStaticParams () {
 export async function generateMetadata ({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
-  const projectName = slugParts.slice(-1)[0]
+  if (slugParts.length < 5) return notFound() // Validar formato del slug
+
+  const projectLocation = slugParts.slice(3, -1).join('-') // Extrae `location`
+  const projectName = slugParts.slice(-1)[0] // Extrae `name`
 
   const project = projects.find(
-    p => slugify(p.name, { lower: true, strict: true }) === projectName
+    p =>
+      slugify(p.name, { lower: true, strict: true }) === projectName &&
+      slugify(p.location, { lower: true, strict: true }) === projectLocation
   )
 
   if (!project) return notFound()
