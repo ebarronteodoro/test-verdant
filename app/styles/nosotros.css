@@ -897,8 +897,8 @@ main {
         }
 
         & > picture {
-          max-width: 60%;
-          flex-basis: 60%;
+          max-width: 55%;
+          flex-basis: 55%;
           margin-top: -2rem;
 
           & > img {
