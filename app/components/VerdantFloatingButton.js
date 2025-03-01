@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import styles from '../styles/components/verdant-floating-button.module.css'
+import Image from 'next/image'
 
 export default function VerdantFloatingButton () {
   const walinkButtonRef = useRef(null)
@@ -157,7 +158,7 @@ export default function VerdantFloatingButton () {
             {ctaText}
           </span>
         </div>
-        <img src='/VERDI/Verdi Button.png' alt='Verdi te envía un mensaje' />
+        <Image width={100} height={100} src='/VERDI/Verdi Button.png' alt='Verdi te envía un mensaje' />
       </a>
     </div>
   )

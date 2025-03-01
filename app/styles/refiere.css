@@ -136,7 +136,7 @@ main {
             background: #fff;
             color: #033f35;
             font-weight: 700;
-            padding: .2rem;
+            padding: 0.2rem;
             border-radius: 79% 0% 100% 0% / 100% 8% 100% 0%;
             position: absolute;
             top: -0.5rem;
@@ -200,7 +200,8 @@ main {
     flex-flow: row wrap;
     padding: 2rem 0;
     position: relative;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
+
     > .billete {
       position: absolute;
       z-index: 10;
@@ -653,6 +654,8 @@ main {
       }
     }
     & .form-section {
+      overflow-x: visible;
+
       > .flecha_1 {
         left: 5%;
       }
@@ -732,7 +735,9 @@ main {
     }
 
     & .form-section {
+      overflow-x: visible;
       padding: 3rem 0 4rem;
+
       & > h2 {
         font-size: clamp(1rem, 3vw, 1.4rem);
         margin: 0 auto 2rem;

@@ -31,7 +31,7 @@ export default function NotificationSection() {
   return (
     <div className='title-section__sell-land' role='alert'>
       <h2>¿Interesado en vender tu terreno?</h2>
-      <Link target='_blank' href='https://w.app/verdantinmobiliaria'>
+      <Link target='_blank' href='https://wa.link/ahpgbx'>
         Contáctanos
       </Link>
       <button

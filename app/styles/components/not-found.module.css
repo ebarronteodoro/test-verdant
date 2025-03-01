@@ -27,6 +27,8 @@
 
 .image {
   width: clamp(12rem, 18vw, 18rem);
+  height: auto;
+  object-fit: contain;
 }
 
 .button {

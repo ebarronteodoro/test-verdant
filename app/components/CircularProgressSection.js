@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect } from 'react'
 
 export default function CircularProgressSection() {
@@ -78,7 +79,7 @@ export default function CircularProgressSection() {
     <aside className='progress-bar__container'>
       <article className='circular-progress'>
         <figure className='progress-bar__content'>
-          <img src='/nosotros/family.png' alt='Icono de Familias' />
+          <Image width={100} height={100} src='/nosotros/family.png' alt='Icono de Familias' />
           <figcaption className='progress-value'>
             +0
             <br />
@@ -89,7 +90,7 @@ export default function CircularProgressSection() {
       </article>
       <article className='circular-progress'>
         <figure className='progress-bar__content'>
-          <img src='/nosotros/buildings.png' alt='Icono de Edificios Construidos' />
+          <Image width={100} height={100} src='/nosotros/buildings.png' alt='Icono de Edificios Construidos' />
           <figcaption className='progress-value'>
             +000, 000 m<sup>2</sup>
             <br />
@@ -100,7 +101,7 @@ export default function CircularProgressSection() {
       </article>
       <article className='circular-progress'>
         <figure className='progress-bar__content'>
-          <img src='/nosotros/keys.png' alt='Icono de Llaves' />
+          <Image width={100} height={100} src='/nosotros/keys.png' alt='Icono de Llaves' />
           <figcaption className='progress-value'>
             +0
             <br />

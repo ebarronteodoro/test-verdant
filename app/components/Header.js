@@ -8,7 +8,8 @@ import '../styles/components/header.css'
 
 const poppinsSans = Poppins({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700']
+  weight: ['100', '200', '300', '400', '500', '600', '700'],
+  variable: '--font-poppins' // 🔹 Creamos una variable CSS para la fuente
 })
 
 export default function Header () {
@@ -16,7 +17,7 @@ export default function Header () {
     const menuLogo = document.querySelector('.menu-logo-container')
     const navLinks = document.querySelector('.nav')
 
-    const handleMenuClick = (event) => {
+    const handleMenuClick = event => {
       event.preventDefault()
       if (window.getComputedStyle(navLinks).display === 'none') {
         navLinks.style.display = 'block'

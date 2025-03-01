@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model building {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(120)
+  location         String             @db.VarChar(20)
+  longitud         String             @db.VarChar(20)
+  latitud          String             @db.VarChar(20)
+  created_at       DateTime           @default(now()) @db.Timestamp(0)
+  form_submissions form_submissions[]
+  typologies       typologies[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model document_type {
+  id   Int
+  type String @db.VarChar(50)
+
+  @@ignore
+}
+
+model form_submissions {
+  id           Int        @id @default(autoincrement())
+  typology_id  Int
+  project_id   Int
+  first_name   String     @db.VarChar(255)
+  last_name    String     @db.VarChar(255)
+  phone_number String?    @db.VarChar(20)
+  email        String     @db.VarChar(255)
+  dni          String?    @db.VarChar(50)
+  message      String?    @db.Text
+  created_at   DateTime   @default(now()) @db.Timestamp(0)
+  typologies   typologies @relation(fields: [typology_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "form_submissions_ibfk_1")
+  building     building   @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "form_submissions_ibfk_2")
+
+  @@index([project_id], map: "project_id")
+  @@index([typology_id], map: "typology_id")
+}
+
+model lead_contact {
+  id               Int      @id @default(autoincrement())
+  name             String   @db.VarChar(50)
+  lastname         String   @db.VarChar(50)
+  id_building      Int
+  id_document_type Int
+  num_document     String   @db.VarChar(11)
+  email            String   @db.VarChar(320)
+  phone            String   @db.VarChar(21)
+  message          String   @db.VarChar(250)
+  created_at       DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([id_building], map: "fk_lead_id_building")
+}
+
+model lead_general {
+  id               Int      @id @default(autoincrement())
+  name             String   @db.VarChar(50)
+  lastname         String   @db.VarChar(50)
+  id_building      Int
+  id_document_type Int
+  num_document     String   @db.VarChar(11)
+  email            String   @db.VarChar(320)
+  phone            String   @db.VarChar(21)
+  message          String   @db.VarChar(250)
+  created_at       DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([id_building], map: "fk_lead_id_building")
+}
+
+model lead_typologie {
+  id               Int      @id @default(autoincrement())
+  id_typologie     Int
+  name             String   @db.VarChar(50)
+  lastname         String   @db.VarChar(50)
+  id_building      Int
+  id_document_type Int
+  num_document     String   @db.VarChar(11)
+  email            String   @db.VarChar(320)
+  phone            String   @db.VarChar(21)
+  message          String   @db.VarChar(250)
+  created_at       DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([id_building], map: "fk_lead_id_building")
+}
+
+model referred {
+  id               Int      @id @default(autoincrement())
+  id_referrer      Int
+  name             String   @db.VarChar(50)
+  lastname         String   @db.VarChar(50)
+  id_building      Int
+  id_document_type Int
+  num_document     String   @db.VarChar(11)
+  email            String   @db.VarChar(320)
+  phone            String   @db.VarChar(21)
+  created_at       DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([id_building], map: "fk_lead_id_building")
+}
+
+model referrer {
+  id               Int      @id @default(autoincrement())
+  name             String   @db.VarChar(50)
+  lastname         String   @db.VarChar(50)
+  id_building      Int
+  id_document_type Int
+  num_document     String   @db.VarChar(11)
+  email            String   @db.VarChar(320)
+  phone            String   @db.VarChar(21)
+  created_at       DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([id_building], map: "fk_lead_id_building")
+}
+
+model typologies {
+  id                Int                 @id @default(autoincrement())
+  project_id        Int
+  typology_name     String              @db.VarChar(255)
+  bedroom_count     Int
+  image_url         String?             @db.VarChar(2083)
+  created_at        DateTime            @default(now()) @db.Timestamp(0)
+  form_submissions  form_submissions[]
+  building          building            @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "typologies_ibfk_1")
+  typology_features typology_features[]
+
+  @@index([project_id], map: "project_id")
+}
+
+model typology_features {
+  id              Int         @id @default(autoincrement())
+  typology_id     Int?
+  description     String?     @db.VarChar(255)
+  bathrooms       Int?
+  has_living_room Boolean?
+  has_kitchen     Boolean?
+  has_laundry     Boolean?
+  has_balcony     Boolean?
+  typologies      typologies? @relation(fields: [typology_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "typology_features_ibfk_1")
+
+  @@index([typology_id], map: "typology_id")
+}

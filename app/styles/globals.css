@@ -6,6 +6,12 @@
   list-style: none;
 }
 
+input,
+button,
+select {
+  font-family: inherit !important;
+}
+
 body {
   color-scheme: light dark;
 }

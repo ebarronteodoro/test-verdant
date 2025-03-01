@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function TeamCard ({ name, position, image }) {
   return (
     <article className='team-card'>
@@ -6,7 +8,7 @@ export default function TeamCard ({ name, position, image }) {
         <figcaption>{position}</figcaption>
       </header>
       <figure>
-        <img src={image} alt={name} loading='lazy' />
+        <Image width={300} height={300} src={image} alt={name} loading='lazy' />
       </figure>
     </article>
   )

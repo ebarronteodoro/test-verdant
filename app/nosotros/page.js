@@ -8,6 +8,7 @@ import TeamSection from '../components/TeamSection'
 import NotificationSection from '../components/NotificationSection'
 import CircularProgressSection from '../components/CircularProgressSection'
 import CertificacionesSection from '../components/CertificacionesSection'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Nosotros | Verdant Inmobiliaria',
@@ -22,7 +23,7 @@ export default function Home () {
     <Layout>
       <section className='title-section'>
         <picture>
-          <img src='/nosotros/Verdant team.png' alt='Equipo de Verdânt' />
+          <Image width={1000} height={500} priority src='/nosotros/Verdant team.png' alt='Equipo de Verdânt' />
         </picture>
         <div className='title-section__branding'>
           <p>Una nueva forma de vivir</p>

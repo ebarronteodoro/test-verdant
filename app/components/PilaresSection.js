@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function PilaresSection() {
   return (
     <section className='pilares-section'>
@@ -12,7 +14,7 @@ export default function PilaresSection() {
           { img: "client-service.png", label: "Servicio al Cliente" }
         ].map(({ img, label }, index) => (
           <figure key={index}>
-            <img src={`/nosotros/${img}`} alt={label} />
+            <Image width={100} height={100} src={`/nosotros/${img}`} alt={label} />
             <figcaption>{label}</figcaption>
           </figure>
         ))}

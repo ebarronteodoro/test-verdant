@@ -45,6 +45,8 @@ main {
 
       & > img {
         width: 100%;
+        height: auto;
+        object-fit: contain;
       }
     }
 
@@ -210,8 +212,8 @@ main {
         filter: drop-shadow(0px 20px 9px #0000007a);
 
         & .progress-indicator {
-          width: 25px;
-          height: 25px;
+          width: 15px;
+          height: 15px;
           border-radius: 50%;
           position: absolute;
           top: -7px;
@@ -377,6 +379,8 @@ main {
           & img {
             width: 70%;
             margin: 1rem auto 0;
+            object-fit: contain;
+            height: auto;
           }
         }
       }
@@ -479,6 +483,8 @@ main {
         & img {
           width: 65%;
           margin: 0 auto;
+          height: auto;
+          object-fit: contain;
         }
 
         & figcaption {
@@ -763,6 +769,17 @@ main {
 
     & .description-section {
       width: 75%;
+
+      & .progress-bar__container {
+        & .circular-progress {
+          & .progress-indicator {
+            & .progress-indicator {
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+      }
     }
 
     & .certificaciones-section {
@@ -847,6 +864,17 @@ main {
 
     & .description-section {
       width: 65%;
+
+      & .progress-bar__container {
+        & .circular-progress {
+          & .progress-indicator {
+            & .progress-indicator {
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+      }
     }
 
     & .team-section {

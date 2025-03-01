@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function ProjectCard ({
@@ -23,7 +24,7 @@ export default function ProjectCard ({
         <span className='card_location'>{location}</span>
         <span className='card_status'>{status}</span>
         <div className='card_img'>
-          <img src={imgSrc} alt={`Imagen del Proyecto ${name}`} />
+          <Image width={400} height={500} src={imgSrc} alt={`Imagen del Proyecto ${name}`} />
           <div className='icon-container'>
             <img src='/leaf-hover.png' alt='Hoja animada' />
           </div>

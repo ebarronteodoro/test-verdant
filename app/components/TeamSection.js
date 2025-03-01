@@ -7,7 +7,7 @@ const teamMembers = [
   {
     name: 'Jose Vidaurre',
     position: 'Gerente General',
-    image: '/verdant-team/chang.png'
+    image: '/verdant-team/vidaurre.png'
   },
   {
     name: 'Marco Gomero',
