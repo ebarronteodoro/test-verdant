@@ -64,7 +64,7 @@ const projects = [
   }
 ]
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   return projects.map(project => ({
     slug: `departamentos-en-venta-${slugify(project.location, {
       lower: true,
@@ -73,7 +73,7 @@ export async function generateStaticParams () {
   }))
 }
 
-export async function generateMetadata ({ params }) {
+export async function generateMetadata({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
   if (slugParts.length < 5) return notFound() // Validar formato del slug
@@ -112,7 +112,7 @@ export async function generateMetadata ({ params }) {
   }
 }
 
-export default async function ProjectPage ({ params }) {
+export default async function ProjectPage({ params }) {
   const { slug } = await params
 
   const slugParts = slug.split('-')
@@ -121,8 +121,6 @@ export default async function ProjectPage ({ params }) {
   const project = projects.find(
     p => slugify(p.name, { lower: true, strict: true }) === projectName
   )
-
-  if (!project) return notFound()
 
   if (!project) return notFound()
 

@@ -15,8 +15,5 @@ export function getImages (folderPath) {
     .filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file))
     .map(file => `/${folderPath}/${file}`) // Ruta relativa desde `public/`
 
-  console.log('📂 Carpeta de imágenes:', folderPath)
-  console.log('🔗 Rutas generadas:', images)
-
   return images
 }
