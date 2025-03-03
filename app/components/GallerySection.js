@@ -12,11 +12,11 @@ import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-const GallerySection = ({ images }) => {
+const GallerySectionClient = ({ images }) => {
   const galleryRef = useRef(null)
 
   useEffect(() => {
-    if (galleryRef.current) {
+    if (typeof window !== 'undefined' && galleryRef.current) {
       lightGallery(galleryRef.current, {
         thumbnail: true,
         zoom: true,
@@ -72,4 +72,4 @@ const GallerySection = ({ images }) => {
   )
 }
 
-export default GallerySection
+export default GallerySectionClient

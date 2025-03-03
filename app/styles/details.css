@@ -905,6 +905,22 @@ main {
     flex-direction: column;
     scroll-margin-top: 80px;
 
+    & .loading-message,
+    & .error-message {
+      text-align: center;
+      padding: 20px;
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    & .loading-message p {
+      color: #0070f3; /* Color azul para el mensaje de carga */
+    }
+
+    & .error-message p {
+      color: #ff0000; /* Color rojo para el mensaje de error */
+    }
+
     & > img {
       width: 100%;
       height: auto;

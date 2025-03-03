@@ -1,13 +1,10 @@
 import Layout from '@/app/Layouts/layout'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import '../../styles/details.css'
+import '@/app/styles/details.css'
 import slugify from 'slugify'
-import TypologyFetcher from '@/app/components/TypologyFetcher'
-import InfoSection from '@/app/components/InfoSection'
-import ProjectDetails from '@/app/components/ProjectDetails'
-import GallerySection from '@/app/components/GallerySection'
 import { getImages } from '@/app/lib/getImages'
+import DetailsGroup from '@/app/components/groups/DetailsGroup'
 
 const projects = [
   {
@@ -64,7 +61,7 @@ const projects = [
   }
 ]
 
-export async function generateStaticParams() {
+export async function generateStaticParams () {
   return projects.map(project => ({
     slug: `departamentos-en-venta-${slugify(project.location, {
       lower: true,
@@ -73,7 +70,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata ({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
   if (slugParts.length < 5) return notFound() // Validar formato del slug
@@ -97,22 +94,10 @@ export async function generateMetadata({ params }) {
       project.location.slice(1).toLowerCase()
     }`,
     description: `Encuentra tu departamento ideal en ${project.location}. ${project.title} te ofrece departamentos desde ${project.price}. ¡Conoce más aquí!`
-    // openGraph: {
-    //   title: `Departamentos en venta en ${project.location} - ${project.name}`,
-    //   description: `Descubre el proyecto ${project.title} con opciones desde ${project.minSize}m² hasta ${project.maxSize}m². ¡Aprovecha nuestras promociones!`,
-    //   images: [
-    //     {
-    //       url: project.imgSrc,
-    //       width: 1200,
-    //       height: 630,
-    //       alt: `Imagen de ${project.title}`
-    //     }
-    //   ]
-    // }
   }
 }
 
-export default async function ProjectPage({ params }) {
+export default async function ProjectPage ({ params }) {
   const { slug } = await params
 
   const slugParts = slug.split('-')
@@ -124,7 +109,7 @@ export default async function ProjectPage({ params }) {
 
   if (!project) return notFound()
 
-  const images = getImages(project.directorio)
+  const images = getImages(project.id)
 
   return (
     <Layout>
@@ -159,10 +144,7 @@ export default async function ProjectPage({ params }) {
           </h3>
         ) : null}
       </section>
-      <InfoSection project={project} />
-      <ProjectDetails project={project} />
-      <GallerySection images={images} />
-      <TypologyFetcher projectId={project.id} />
+      <DetailsGroup project={project} images={images} />
     </Layout>
   )
 }
