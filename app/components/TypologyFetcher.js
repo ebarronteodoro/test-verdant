@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
@@ -9,42 +9,32 @@ import Image from 'next/image'
 
 export default function TypologyFetcher ({ projectId }) {
   const [typologies, setTypologies] = useState([])
-  const [features, setFeatures] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [filteredTypologies, setFilteredTypologies] = useState([])
+  const [activeFilter, setActiveFilter] = useState('all')
+  const [selectedTypologyId, setSelectedTypologyId] = useState('')
+  const swiperRef = useRef(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [typologiesRes, featuresRes] = await Promise.all([
-          fetch(`/api/typologies?project=${projectId}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            cache: 'no-store'
-          }),
-          fetch(`/api/typology_features?project=${projectId}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            cache: 'no-store'
-          })
-        ])
+        const response = await fetch(`/api/typology_features?project=${projectId}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          cache: 'no-store'
+        })
 
-        if (!typologiesRes.ok || !featuresRes.ok) {
+        if (!response.ok) {
           throw new Error('Error al obtener datos de la API')
         }
 
-        const typologiesData = await typologiesRes.json()
-        const featuresData = await featuresRes.json()
-
-        console.log(featuresData)
-
-        setTypologies(typologiesData)
-        setFeatures(
-          featuresData.reduce((acc, feature) => {
-            acc[feature.typology_id] = feature.features
-            return acc
-          }, {})
-        )
+        const data = await response.json()
+        setTypologies(data)
+        setFilteredTypologies(data)
+        if (data.length > 0) {
+          setSelectedTypologyId(data[0].typology_id)
+        }
       } catch (error) {
         setError(error.message)
       } finally {
@@ -54,6 +44,44 @@ export default function TypologyFetcher ({ projectId }) {
 
     fetchData()
   }, [projectId])
+
+  useEffect(() => {
+    if (filteredTypologies.length > 0) {
+      setSelectedTypologyId(filteredTypologies[0].typology_id)
+    }
+  }, [filteredTypologies])
+
+  const handleSelectChange = (event) => {
+    const selectedTypologyId = event.target.value
+    setSelectedTypologyId(selectedTypologyId)
+    const selectedIndex = filteredTypologies.findIndex(
+      typo => typo.typology_id === parseInt(selectedTypologyId)
+    )
+    if (swiperRef.current && selectedIndex !== -1) {
+      swiperRef.current.swiper.slideTo(selectedIndex)
+    }
+  }
+
+  const handleFilterClick = (bedroomCount) => {
+    setActiveFilter(bedroomCount)
+    if (bedroomCount === 'all') {
+      setFilteredTypologies(typologies)
+    } else {
+      setFilteredTypologies(
+        typologies.filter(typo => typo.bedroom_count === parseInt(bedroomCount))
+      )
+    }
+  }
+
+  const handleSlideChange = () => {
+    if (swiperRef.current) {
+      const activeIndex = swiperRef.current.swiper.activeIndex
+      const activeTypology = filteredTypologies[activeIndex]
+      if (activeTypology) {
+        setSelectedTypologyId(activeTypology.typology_id)
+      }
+    }
+  }
 
   return (
     <section className='cotizacion-section' id='cotiza'>
@@ -88,14 +116,16 @@ export default function TypologyFetcher ({ projectId }) {
         <div className='typology-container'>
           <div className='typology-carousel'>
             <Swiper
+              ref={swiperRef}
               modules={[Navigation]}
               slidesPerView={1}
               spaceBetween={10}
               navigation
               className='typology-image swiper mySwiperTypologies'
+              onSlideChange={handleSlideChange}
             >
-              {typologies.map(typo => (
-                <SwiperSlide key={typo.id}>
+              {filteredTypologies.map(typo => (
+                <SwiperSlide key={typo.typology_id}>
                   <figure className='typo-figure swiper-slide'>
                     <Image
                       width={550}
@@ -113,7 +143,7 @@ export default function TypologyFetcher ({ projectId }) {
                             icon: '/icons/bed.svg'
                           },
                           {
-                            label: `${typo.bathrooms} Baños`,
+                            label: `${typo.features[0].bathrooms} Baños`,
                             icon: '/icons/toiletIcon.png'
                           },
                           {
@@ -125,11 +155,12 @@ export default function TypologyFetcher ({ projectId }) {
                             label: 'Lavandería',
                             icon: '/icons/washmachineIcon.png'
                           }
-                        ]
-                          .concat(features[typo.id] || [])
-                          .map(({ label, icon }, index) => (
-                            <li key={index}>{label}</li>
-                          ))}
+                        ].map(({ label, icon }, index) => (
+                          <li key={index}>
+                            <Image className='icon' src={icon} width={30} height={30} alt={`Icono de ${label}`} />
+                            <span>{label}</span>
+                          </li>
+                        ))}
                       </ul>
                     </aside>
                   </figure>
@@ -153,18 +184,42 @@ export default function TypologyFetcher ({ projectId }) {
               <div className='typology-filter'>
                 <span>Nº Dormitorios:</span>
                 <div className='filter-buttons'>
-                  <button className='filter-btn active'>Todas</button>
-                  <button className='filter-btn'>1</button>
-                  <button className='filter-btn'>2</button>
-                  <button className='filter-btn'>3</button>
+                  <button
+                    className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+                    onClick={() => handleFilterClick('all')}
+                  >
+                    Todas
+                  </button>
+                  <button
+                    className={`filter-btn ${activeFilter === 1 ? 'active' : ''}`}
+                    onClick={() => handleFilterClick(1)}
+                  >
+                    1
+                  </button>
+                  <button
+                    className={`filter-btn ${activeFilter === 2 ? 'active' : ''}`}
+                    onClick={() => handleFilterClick(2)}
+                  >
+                    2
+                  </button>
+                  <button
+                    className={`filter-btn ${activeFilter === 3 ? 'active' : ''}`}
+                    onClick={() => handleFilterClick(3)}
+                  >
+                    3
+                  </button>
                 </div>
               </div>
             </div>
 
             <form id='typology-form' className='form'>
               <div className='form-group'>
-                <select id='typology-select' name='typology' required>
-                  <option value=''>Cargando...</option>
+                <select id='typology-select' name='typology' required onChange={handleSelectChange} value={selectedTypologyId}>
+                  {filteredTypologies.map(typo => (
+                    <option key={typo.typology_id} value={typo.typology_id}>
+                      {typo.typology_name}
+                    </option>
+                  ))}
                 </select>
               </div>
 

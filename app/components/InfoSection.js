@@ -37,9 +37,11 @@ export default function InfoSection ({ project }) {
                   <path d='M0 0h24v24H0z' fill='none' />
                   <path d='M18.364 4.636a9 9 0 0 1 .203 12.519l-.203.21-4.243 4.242a3 3 0 0 1-4.097.135l-.144-.135-4.244-4.243A9 9 0 0 1 18.364 4.636zM12 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z' />
                 </svg>
-                <span>
-                  {project.ubicacion} <strong>{project.distrito}</strong>
-                </span>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: `${project.ubicacion} <strong>${project.distrito}</strong>`
+                  }}
+                />
               </p>
             </div>
 

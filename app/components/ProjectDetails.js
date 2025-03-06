@@ -70,6 +70,22 @@ export default function ProjectDetails ({ project }) {
 
   const [videoActive, setVideoActive] = useState(false)
 
+  const handleDownloadBrochure = project => {
+    if (!project.brochure_path) {
+      console.error('No se encontró la ruta del brochure.')
+      return
+    }
+
+    const fileName = project.brochure_path.split('/').pop()
+
+    const link = document.createElement('a')
+    link.href = project.brochure_path
+    link.setAttribute('download', fileName)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <>
       <section className='project-section'>
@@ -127,6 +143,7 @@ export default function ProjectDetails ({ project }) {
             type='button'
             title='Descargar Brochure'
             className='download-brochure'
+            onClick={() => handleDownloadBrochure(project)}
           >
             <svg
               width='34'

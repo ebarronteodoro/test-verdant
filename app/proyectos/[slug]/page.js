@@ -3,13 +3,13 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import '@/app/styles/details.css'
 import slugify from 'slugify'
-import { getImages } from '@/app/lib/getImages'
 import DetailsGroup from '@/app/components/groups/DetailsGroup'
 
 const projects = [
   {
     id: 'soil',
     name: 'SOIL',
+    brochure_path: '/brochures/brochure-soil.pdf',
     title: 'Soil Pueblo Libre',
     location: 'PUEBLO LIBRE',
     address: 'Av. La Marina 426',
@@ -36,6 +36,7 @@ const projects = [
   {
     id: 'seed',
     name: 'SEED',
+    brochure_path: '/brochures/brochure-soil.pdf',
     title: 'Seed Growing Home',
     location: 'SURCO',
     address: 'Jr. República de Líbano 173',
@@ -49,7 +50,7 @@ const projects = [
     logo: '/details/logo-seed.png',
     directorio: 'SEED',
     promo: 'Solo 10 depas disponibles',
-    ubicacion: 'Jr. República del Líbano 179 - 141, ',
+    ubicacion: 'Jr. República del Líbano<br />179 - 141, ',
     distrito: 'Surco',
     sala_ventas: 'Jr. República del Líbano 179 - 141, Surco',
     horario: 'Lunes a domingo: 10 am - 7 pm.',
@@ -109,8 +110,6 @@ export default async function ProjectPage ({ params }) {
 
   if (!project) return notFound()
 
-  const images = getImages(project.id)
-
   return (
     <Layout>
       <section className='intro-section'>
@@ -144,7 +143,7 @@ export default async function ProjectPage ({ params }) {
           </h3>
         ) : null}
       </section>
-      <DetailsGroup project={project} images={images} />
+      <DetailsGroup project={project} />
     </Layout>
   )
 }

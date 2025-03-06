@@ -34,7 +34,7 @@ export async function GET (req) {
   const projectId = projects[projectKey]
 
   try {
-    // 🔹 Obtener todas las tipologías del proyecto
+    // Obtener todas las tipologías del proyecto
     const typologies = await prisma.typologies.findMany({
       where: { project_id: projectId },
       select: {
@@ -52,7 +52,7 @@ export async function GET (req) {
       )
     }
 
-    // 🔹 Obtener características de todas las tipologías en una sola consulta
+    // Obtener características de todas las tipologías en una sola consulta
     const typologyFeatures = await prisma.typology_features.findMany({
       where: {
         typology_id: { in: typologies.map(t => t.id) }
@@ -68,7 +68,7 @@ export async function GET (req) {
       }
     })
 
-    // 🔹 Organizar los datos en un formato estructurado
+    // Organizar los datos en un formato estructurado
     const response = typologies.map(typology => ({
       typology_id: typology.id,
       typology_name: typology.typology_name,
