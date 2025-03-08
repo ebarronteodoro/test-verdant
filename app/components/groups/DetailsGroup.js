@@ -13,17 +13,17 @@ const ProjectDetails = dynamic(
   () => import('@/app/components/ProjectDetails'),
   { ssr: false }
 )
-// const GallerySectionClient = dynamic(
-//   () => import('@/app/components/GallerySection'),
-//   { ssr: false }
-// )
+const GallerySectionClient = dynamic(
+  () => import('@/app/components/GallerySection'),
+  { ssr: false }
+)
 
-export default function DetailsGroup ({ project }) {
+export default function DetailsGroup ({ project, images }) {
   return (
     <>
       <InfoSection project={project} />
       <ProjectDetails project={project} />
-      {/* <GallerySectionClient projectId={project.id} /> */}
+      <GallerySectionClient images={images} />
       <TypologyFetcher projectId={project.id} />
     </>
   )

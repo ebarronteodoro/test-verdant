@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import '@/app/styles/details.css'
 import slugify from 'slugify'
 import DetailsGroup from '@/app/components/groups/DetailsGroup'
+import fs from 'fs'
+import path from 'path'
 
 const projects = [
   {
@@ -21,7 +23,7 @@ const projects = [
     price: 'S/ 277,780',
     distrito_alterno: 'Surco',
     logo: '/details/logo-soil.png',
-    directorio: 'SOIL',
+    directorio: 'SOIL', // carpeta dentro de public donde están las imágenes
     promo: 'Vive cerca a Jesús María y Magdalena',
     ubicacion: 'Av. La Marina 406 - 425, ',
     distrito: 'Pueblo Libre',
@@ -48,7 +50,7 @@ const projects = [
     price: 'S/ 467,780',
     distrito_alterno: 'Pueblo Libre',
     logo: '/details/logo-seed.png',
-    directorio: 'SEED',
+    directorio: 'SEED', // carpeta dentro de public para este proyecto
     promo: 'Solo 10 depas disponibles',
     ubicacion: 'Jr. República del Líbano<br />179 - 141, ',
     distrito: 'Surco',
@@ -62,7 +64,7 @@ const projects = [
   }
 ]
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   return projects.map(project => ({
     slug: `departamentos-en-venta-${slugify(project.location, {
       lower: true,
@@ -71,13 +73,13 @@ export async function generateStaticParams () {
   }))
 }
 
-export async function generateMetadata ({ params }) {
+export async function generateMetadata({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
   if (slugParts.length < 5) return notFound() // Validar formato del slug
 
-  const projectLocation = slugParts.slice(3, -1).join('-') // Extrae `location`
-  const projectName = slugParts.slice(-1)[0] // Extrae `name`
+  const projectLocation = slugParts.slice(3, -1).join('-') // Extrae la ubicación
+  const projectName = slugParts.slice(-1)[0] // Extrae el nombre
 
   const project = projects.find(
     p =>
@@ -98,17 +100,34 @@ export async function generateMetadata ({ params }) {
   }
 }
 
-export default async function ProjectPage ({ params }) {
-  const { slug } = await params
+// Función de servidor para leer las imágenes de la carpeta del proyecto
+async function getProjectImages(folderName) {
+  const folderPath = path.join(process.cwd(), 'public', folderName)
+  try {
+    const files = fs.readdirSync(folderPath)
+    // Filtramos archivos de imagen (jpg, jpeg, png, gif, webp)
+    const images = files
+      .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
+      .map(file => `/${folderName}/${file}`)
+    return images
+  } catch (error) {
+    console.error('Error leyendo imágenes en la carpeta:', error)
+    return []
+  }
+}
 
+export default async function ProjectPage({ params }) {
+  const { slug } = await params
   const slugParts = slug.split('-')
   const projectName = slugParts.slice(-1)[0]
 
   const project = projects.find(
     p => slugify(p.name, { lower: true, strict: true }) === projectName
   )
-
   if (!project) return notFound()
+
+  // Usamos la propiedad "directorio" del proyecto para obtener la ruta de la carpeta en public
+  const images = await getProjectImages(project.directorio)
 
   return (
     <Layout>
@@ -143,7 +162,8 @@ export default async function ProjectPage ({ params }) {
           </h3>
         ) : null}
       </section>
-      <DetailsGroup project={project} />
+
+      <DetailsGroup project={project} images={images} />
     </Layout>
   )
 }

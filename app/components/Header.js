@@ -5,14 +5,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Poppins } from 'next/font/google'
 import '../styles/components/header.css'
+import { usePathname } from 'next/navigation'
 
 const poppinsSans = Poppins({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700'],
-  variable: '--font-poppins' // 🔹 Creamos una variable CSS para la fuente
+  variable: '--font-poppins'
 })
 
 export default function Header () {
+  const pathname = usePathname()
+
+  // Control del menú responsive
   useEffect(() => {
     const menuLogo = document.querySelector('.menu-logo-container')
     const navLinks = document.querySelector('.nav')
@@ -33,6 +37,49 @@ export default function Header () {
     }
   }, [])
 
+  // Funcionalidad de scroll hacia la sección "cotiza"
+  useEffect(() => {
+    function scrollToSection (updateURL = true) {
+      const section = document.getElementById('cotiza')
+      if (section) {
+        const offset = 80
+        const sectionPosition =
+          section.getBoundingClientRect().top + window.scrollY - offset
+
+        window.scrollTo({
+          top: sectionPosition,
+          behavior: 'smooth'
+        })
+
+        // Actualizar la URL con "#cotiza" si se activa desde el botón
+        if (updateURL) {
+          history.pushState(null, null, '#cotiza')
+        }
+      }
+    }
+
+    // Verifica si la URL ya contiene "#cotiza" al cargar la página
+    if (window.location.hash === '#cotiza') {
+      setTimeout(() => scrollToSection(false), 1000)
+    }
+
+    const btnCotizar = document.getElementById('btn-cotizar')
+    const handleBtnCotizarClick = e => {
+      e.preventDefault()
+      scrollToSection()
+    }
+
+    if (btnCotizar) {
+      btnCotizar.addEventListener('click', handleBtnCotizarClick)
+    }
+
+    return () => {
+      if (btnCotizar) {
+        btnCotizar.removeEventListener('click', handleBtnCotizarClick)
+      }
+    }
+  }, [])
+
   return (
     <header className={`header ${poppinsSans.className}`}>
       <div className='nav-container'>
@@ -48,35 +95,42 @@ export default function Header () {
             />
           </picture>
         </Link>
-        <div className='menu-logo-container'>
-          <Image
-            src='/header/menu.png'
-            alt='Menú Logo'
-            className='menu-logo'
-            width={57}
-            height={57}
-          />
+        <div className='right-section'>
+          {pathname.startsWith('/proyectos/') && (
+            <Link className='btn-cotizar' href='#cotiza' id='btn-cotizar'>
+              Cotiza tu depa
+            </Link>
+          )}
+          <div className='menu-logo-container'>
+            <Image
+              src='/header/menu.png'
+              alt='Menú Logo'
+              className='menu-logo'
+              width={57}
+              height={57}
+            />
+          </div>
+          <nav className='nav'>
+            <ul className='nav-links'>
+              <li>
+                <Link href='/nosotros' className='nav-link-button'>
+                  Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link href='/proyectos' className='nav-link-button clickable'>
+                  Proyectos
+                </Link>
+              </li>
+              <li>
+                <Link href='/refiere' className='nav-link-button'>
+                  Refiere y Gana
+                </Link>
+              </li>
+              {/* <li><Link href="/novedades" className="nav-link-button">Novedades</Link></li> */}
+            </ul>
+          </nav>
         </div>
-        <nav className='nav'>
-          <ul className='nav-links'>
-            <li>
-              <Link href='/nosotros' className='nav-link-button'>
-                Nosotros
-              </Link>
-            </li>
-            <li>
-              <Link href='/proyectos' className='nav-link-button clickable'>
-                Proyectos
-              </Link>
-            </li>
-            <li>
-              <Link href='/refiere' className='nav-link-button'>
-                Refiere y Gana
-              </Link>
-            </li>
-            {/* <li><Link href="/novedades" className="nav-link-button">Novedades</Link></li> */}
-          </ul>
-        </nav>
       </div>
     </header>
   )
