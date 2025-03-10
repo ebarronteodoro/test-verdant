@@ -1,115 +1,142 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import { useEffect } from 'react'
+import Image from "next/image";
+import { useEffect } from "react";
 
 export default function CircularProgressSection() {
   useEffect(() => {
-    const progressBars = document.querySelectorAll('.circular-progress')
-    const colors = ['#b1e2de', '#e3efc6', '#e0eaf3']
-    const targetValues = [500, 100000, 10]
+    const progressBars = document.querySelectorAll(".circular-progress");
+    const colors = ["#b1e2de", "#e3efc6", "#e0eaf3"];
+    const targetValues = [1100, 100000, 10];
 
     progressBars.forEach((bar, index) => {
-      let progress = 0
-      const targetProgress = 100 // % de progreso final
-      const duration = 2000
-      const startTime = performance.now()
-      const indicator = bar.querySelector('.progress-indicator')
-      const valueElement = bar.querySelector('.progress-value')
-      const endValue = targetValues[index]
-      let currentValue = 0
+      let progress = 0;
+      const targetProgress = 100; // % de progreso final
+      const duration = 2000;
+      const startTime = performance.now();
+      const indicator = bar.querySelector(".progress-indicator");
+      const valueElement = bar.querySelector(".progress-value");
+      const endValue = targetValues[index];
+      let currentValue = 0;
+
+      // Definimos la unidad para el segundo círculo (metros cuadrados)
+      const unit = targetValues[index] === 100000 ? " m<sup>2</sup>" : "";
 
       function updateIndicator(progress) {
-        const angle = (progress / 100) * 360
-        const radius = bar.offsetWidth / 2 - 8 // Ajuste dinámico del radio
-        const radians = (angle - 90) * (Math.PI / 180)
-        const x = Math.cos(radians) * radius
-        const y = Math.sin(radians) * radius
-        indicator.style.transform = `translate(${x}px, ${y}px)`
+        const angle = (progress / 100) * 360;
+        const radius = bar.offsetWidth / 2 - 8; // Ajuste dinámico del radio
+        const radians = (angle - 90) * (Math.PI / 180);
+        const x = Math.cos(radians) * radius;
+        const y = Math.sin(radians) * radius;
+        indicator.style.transform = `translate(${x}px, ${y}px)`;
       }
 
       function animate(time) {
-        const elapsed = time - startTime
-        progress = Math.min((elapsed / duration) * targetProgress, targetProgress)
-
-        bar.style.background = `conic-gradient(${colors[index]} 0% ${progress}%, #dbdbdb ${progress}% 100%)`
-        updateIndicator(progress)
+        const elapsed = time - startTime;
+        progress = Math.min(
+          (elapsed / duration) * targetProgress,
+          targetProgress
+        );
+        bar.style.background = `conic-gradient(${colors[index]} 0% ${progress}%, #dbdbdb ${progress}% 100%)`;
+        updateIndicator(progress);
 
         setTimeout(() => {
-          indicator.style.top = 'unset'
-        }, 30)
+          indicator.style.top = "unset";
+        }, 30);
 
         if (progress < targetProgress) {
-          requestAnimationFrame(animate)
+          requestAnimationFrame(animate);
         } else {
-          updateIndicator(targetProgress)
+          updateIndicator(targetProgress);
         }
       }
 
-      requestAnimationFrame(animate)
+      requestAnimationFrame(animate);
 
       function animateNumbers() {
-        const increment = Math.ceil(endValue / (duration / 30))
+        const startTime = performance.now();
         const interval = setInterval(() => {
-          if (currentValue >= endValue) {
-            clearInterval(interval)
-            valueElement.innerHTML = `+${endValue.toLocaleString()}<br>${valueElement.innerHTML.split('<br>')[1]}`
+          const elapsed = performance.now() - startTime;
+          if (elapsed >= duration) {
+            clearInterval(interval);
+            valueElement.innerHTML = `+${endValue.toLocaleString()}${unit}<br>${
+              valueElement.innerHTML.split("<br>")[1]
+            }`;
           } else {
-            currentValue += increment
-            valueElement.innerHTML = `+${currentValue.toLocaleString()}<br>${valueElement.innerHTML.split('<br>')[1]}`
+            const progress = elapsed / duration;
+            const currentValue = Math.floor(endValue * progress);
+            valueElement.innerHTML = `+${currentValue.toLocaleString()}${unit}<br>${
+              valueElement.innerHTML.split("<br>")[1]
+            }`;
           }
-        }, 30)
+        }, 30);
       }
-      animateNumbers()
+
+      animateNumbers();
 
       function updateIndicatorPosition() {
-        updateIndicator(progress)
+        updateIndicator(progress);
       }
 
-      window.removeEventListener('resize', updateIndicatorPosition)
-      window.addEventListener('resize', updateIndicatorPosition)
+      window.removeEventListener("resize", updateIndicatorPosition);
+      window.addEventListener("resize", updateIndicatorPosition);
 
       setTimeout(() => {
-        updateIndicator(targetProgress)
-      }, duration + 100)
-    })
-  }, [])
+        updateIndicator(targetProgress);
+      }, duration + 100);
+    });
+  }, []);
 
   return (
-    <aside className='progress-bar__container'>
-      <article className='circular-progress'>
-        <figure className='progress-bar__content'>
-          <Image width={100} height={100} src='/nosotros/family.png' alt='Icono de Familias' />
-          <figcaption className='progress-value'>
+    <aside className="progress-bar__container">
+      <article className="circular-progress">
+        <figure className="progress-bar__content">
+          <Image
+            width={100}
+            height={100}
+            src="/nosotros/family.png"
+            alt="Icono de Familias"
+          />
+          <figcaption className="progress-value">
             +0
             <br />
             familias
           </figcaption>
         </figure>
-        <div className='progress-indicator'></div>
+        <div className="progress-indicator"></div>
       </article>
-      <article className='circular-progress'>
-        <figure className='progress-bar__content'>
-          <Image width={100} height={100} src='/nosotros/buildings.png' alt='Icono de Edificios Construidos' />
-          <figcaption className='progress-value'>
+      <article className="circular-progress">
+        <figure className="progress-bar__content">
+          <Image
+            width={100}
+            height={100}
+            src="/nosotros/buildings.png"
+            alt="Icono de Edificios Construidos"
+          />
+          <figcaption className="progress-value">
             +000, 000 m<sup>2</sup>
             <br />
             Construidos
           </figcaption>
         </figure>
-        <div className='progress-indicator'></div>
+        <div className="progress-indicator"></div>
       </article>
-      <article className='circular-progress'>
-        <figure className='progress-bar__content'>
-          <Image width={100} height={100} src='/nosotros/keys.png' alt='Icono de Llaves' />
-          <figcaption className='progress-value'>
+      <article className="circular-progress">
+        <figure className="progress-bar__content">
+          <Image
+            width={100}
+            height={100}
+            src="/nosotros/keys.png"
+            alt="Icono de Llaves"
+          />
+          <figcaption className="progress-value">
             +0
             <br />
             Proyectos Entregados
           </figcaption>
         </figure>
-        <div className='progress-indicator'></div>
+        <div className="progress-indicator"></div>
       </article>
     </aside>
-  )
+  );
 }

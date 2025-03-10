@@ -1,0 +1,487 @@
+/* Sección de ofertas */
+.ofertas {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #d2dcdb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ofertas-container {
+  width: 80%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.ofertas-container__text {
+  text-align: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.ofertas-container h2 {
+  /* font-size: 3rem; */
+  margin-bottom: 1.5rem;
+  font-size: 12px;
+  display: block;
+  color: #033f35;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ofertas-container p {
+  text-wrap-style: pretty;
+  font-size: clamp(1rem, 3vw, 1.4rem) !important;
+  color: #033f35;
+  margin-bottom: 30px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.countdown {
+  max-width: 1250px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+
+  & .days-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    font-family: Arial, sans-serif;
+
+    & .days-number {
+      color: #033f35;
+      font-weight: 700;
+      font-size: clamp(2rem, 3.5vw + 1rem, 3.5rem);
+    }
+
+    & .days-label {
+      color: #033f35;
+      font-weight: 500;
+      font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+      margin-left: 0.5rem;
+    }
+  }
+
+  & .time-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bloc-time {
+    float: left;
+    margin-right: 1.8rem;
+    text-align: center;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .count-title {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: clamp(0.5rem, 1.2vw, 1.3rem);
+    color: #033f35;
+    font-weight: 700;
+  }
+
+  .figure-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .figure {
+    position: relative;
+    float: left;
+    height: 50px;
+    width: 40px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2),
+      inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+
+    &:last-child {
+      margin-right: 0 !important;
+    }
+
+    > span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      /* font: normal 5.94em/107px 'Lato'; */
+      font-weight: 600;
+      color: #033f35;
+      font-size: clamp(1rem, 2.1vw, 1.94em);
+      line-height: 50px;
+    }
+
+    .top,
+    .bottom-back {
+      &:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .top {
+      z-index: 3;
+      background-color: #fff;
+      transform-origin: 50% 100%;
+      -webkit-transform-origin: 50% 100%;
+      border-radius: 4px;
+      transform: perspective(200px);
+      /* font: normal 5.94em/107px 'Lato'; */
+      font-weight: 600;
+      font-size: clamp(1rem, 2.1vw, 1.94em);
+      line-height: 50px;
+      /* line-height: clamp(1.2rem, 2.3vw, 2em); */
+    }
+
+    .bottom {
+      z-index: 1;
+      /* font: normal 5.94em/107px 'Lato'; */
+      font-weight: 600;
+      font-size: clamp(1rem, 2.1vw, 1.94em);
+      line-height: 50px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background-color: rgba(255, 255, 255, 0.02);
+      }
+    }
+
+    .bottom-back {
+      z-index: 2;
+      top: 0;
+      height: 50%;
+      overflow: hidden;
+      background-color: #fff;
+      border-radius: 4px;
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
+
+    .top,
+    .top-back {
+      height: 50%;
+      overflow: hidden;
+      backface-visibility: hidden;
+    }
+
+    .top-back {
+      z-index: 4;
+      bottom: 0;
+      background-color: #fff;
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+      transform: perspective(200px) rotateX(180deg);
+      border-radius: 4px;
+
+      span {
+        position: absolute;
+        top: -100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
+  }
+}
+
+.ofertas-proyectos {
+  width: 80%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-direction: column;
+
+  > a {
+    background-color: #97e15b;
+    color: #033f35;
+    font-weight: 600;
+    padding: 0.5rem 2rem;
+    border-radius: 35px;
+    max-width: 350px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    -webkit-box-shadow: 0px 10px 27px -15px rgba(0, 0, 0, 1.75);
+    -moz-box-shadow: 0px 10px 27px -15px rgba(0, 0, 0, 1.75);
+    box-shadow: 0px 10px 27px -15px rgba(0, 0, 0, 1.75);
+    position: relative;
+    z-index: 10;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:hover {
+      color: #99e775;
+      background-color: #033f35;
+    }
+  }
+  > img {
+    z-index: 0;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    bottom: -2rem;
+  }
+}
+
+.proyecto {
+  /* background-color: #fff; */
+  /* padding: 20px; */
+  border: 1px solid #ddd;
+  /* border-radius: 10px; */
+  text-align: center;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  position: relative;
+  /* margin-top: 40px; */
+  margin: 0 auto;
+
+  .laterales {
+    position: absolute;
+
+    width: 190px;
+    height: auto;
+    &.lateral_izq {
+      transform: translate(-100%, -50%);
+      left: -20%;
+      top: 50%;
+    }
+
+    &.lateral_der {
+      right: -20%;
+      transform: translate(100%, -50%) rotate(180deg);
+      top: 50%;
+    }
+  }
+}
+
+.proyecto .promocion {
+  width: 100%;
+  height: 100%;
+  max-width: 750px;
+  max-height: 450px;
+  margin-top: 15px;
+  position: relative;
+  z-index: 10;
+  transition: all 0.3s ease;
+  object-fit: contain;
+
+  &:hover {
+    filter: drop-shadow(0 0 50px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.proyecto h3 {
+  font-size: 24px;
+  color: #033f35;
+  margin-bottom: 5px;
+}
+
+.proyecto p {
+  font-size: 16px;
+  color: #666;
+}
+
+@media (max-width: 763px) {
+  .ofertas {
+    padding: 2em 1rem;
+  }
+
+  .ofertas-container {
+    flex-direction: column;
+  }
+
+  .ofertas-container h2 {
+    /* font-size: 30px; */
+
+    & strong {
+      font-weight: 700;
+    }
+  }
+
+  .ofertas-container p {
+    font-size: 24px;
+    margin-bottom: 1rem;
+  }
+
+  .proyecto .promocion {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .ofertas-proyectos {
+    flex-direction: column;
+    gap: 1rem;
+
+    > img {
+      width: auto;
+      height: 100px;
+      position: absolute;
+    }
+  }
+
+  .ofertas-container__text {
+    text-align: center;
+    width: 100%;
+  }
+
+  .countdown {
+    & .time-container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+      & .bloc-time {
+        margin-right: 1rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      & .figure {
+        height: 35px;
+        width: 25px;
+        margin-right: 0.3rem;
+
+        & .top,
+        & .bottom {
+          line-height: 35px;
+        }
+
+        & > span {
+          line-height: 35px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 764px) and (max-width: 1400px) {
+  .ofertas {
+    padding: 4em 2rem;
+  }
+
+  .proyecto .promocion {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .ofertas-proyectos {
+    gap: 20px;
+    /* justify-content: space-evenly; */
+  }
+
+  .ofertas-container p {
+    font-size: 24px;
+  }
+
+  .countdown {
+    & .time-container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+      & .figure {
+        height: 65px;
+        width: 50px;
+
+        & .top,
+        & .bottom {
+          line-height: 65px;
+        }
+
+        & > span {
+          line-height: 65px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 764px) and (max-width: 1400px) {
+  .ofertas {
+    padding: 4em 90px;
+  }
+
+  .proyecto .promocion {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .ofertas-proyectos {
+    gap: 20px;
+  }
+
+  .ofertas-container p {
+    font-size: 24px;
+  }
+
+  .countdown {
+    & .time-container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+      & .figure {
+        height: 50px;
+        width: 40px;
+
+        & .top,
+        & .bottom {
+          line-height: 50px;
+        }
+
+        & > span {
+          line-height: 50px;
+        }
+      }
+    }
+  }
+}

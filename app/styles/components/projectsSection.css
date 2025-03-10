@@ -36,20 +36,30 @@
             top: 75%;
             transform: translate(-50%, -50%) rotate(-90deg);
 
+            /* display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            align-items: baseline; */
+
             > .building-name {
               font-size: 2rem;
               font-weight: 600;
               color: #033f35;
+              display: inline;
             }
 
             > img {
               width: 21px;
               height: auto;
+              display: inline;
+              margin: 0 0.2rem;
             }
 
             > .building-adress {
               font-size: 14px;
               color: #033f35;
+              font-style: normal;
+              display: inline;
             }
           }
 
@@ -95,7 +105,6 @@
               > img {
                 width: 100%;
                 height: auto;
-                object-fit: contain;
                 transition: transform 0.3s ease;
               }
 

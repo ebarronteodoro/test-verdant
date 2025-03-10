@@ -1,0 +1,203 @@
+.testimonial-section {
+  /* background: #fff; */
+  padding: 2.5rem 0;
+
+  & h2 {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    text-align: center;
+    text-wrap-style: balance;
+    font-weight: 500;
+    color: #193e35;
+    /* padding-bottom: 2rem; */
+
+    & strong {
+      font-weight: 700;
+    }
+  }
+
+  & .testimonial-section__container {
+    display: flex;
+    max-width: 1050px;
+    margin: 0 auto;
+    width: 75%;
+    position: relative;
+    height: 19rem;
+
+    & .testimonial-section__swiper {
+      width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 1rem 0 !important;
+
+      & .swiper-slide {
+        & .testimonial-section__card {
+          transition: all 0.3s ease;
+          background: #d6ecc0;
+          border-radius: 1.5rem;
+          height: 100%;
+          width: 100%;
+          padding: 2rem 1rem;
+          filter: drop-shadow(0 0 0.75rem rgb(105, 155, 65, 0.15));
+          -webkit-box-shadow: 0px 11px 22px -18px rgba(0, 0, 0, 1.75);
+          -moz-box-shadow: 0px 11px 22px -18px rgba(0, 0, 0, 1.75);
+          box-shadow: 0px 11px 22px -18px rgba(0, 0, 0, 1.75);
+
+          & header {
+            display: flex;
+            padding: 0 3rem;
+            gap: 1rem;
+            align-items: center;
+
+            & img {
+              border-radius: 100%;
+              width: 50px;
+              height: 50px;
+              background: #fff;
+            }
+
+            & span {
+              display: flex;
+              flex-direction: column;
+              color: #193e35;
+              font-size: 0.9rem;
+
+              & strong {
+                line-height: 1;
+              }
+            }
+          }
+
+          & p {
+            padding: 1rem;
+            /* background: #e6f1d9; */
+            width: 95%;
+            margin: 1rem auto 0;
+            border-radius: 1.5rem;
+            font-size: clamp(0.7rem, 1vw, 0.9rem);
+          }
+        }
+
+        &.swiper-slide-next {
+          > .testimonial-section__card {
+            background-color: #eef4ea;
+          }
+        }
+
+        &.swiper-slide-prev {
+          > .testimonial-section__card {
+            background-color: #eef4ea;
+          }
+        }
+      }
+    }
+
+    & .swiper-button-next,
+    & .swiper-button-prev {
+      color: #d6ecc0;
+      border-radius: 100%;
+      padding: 1.5rem;
+      background: #fff;
+      filter: drop-shadow(0 0 0.75rem rgb(105, 155, 65, 0.55));
+
+      &::after {
+        font-size: clamp(1.5rem, 1.5vw, 1.8rem);
+        font-weight: 700;
+      }
+    }
+
+    & .swiper-button-next {
+      right: -1rem !important;
+    }
+
+    & .swiper-button-prev {
+      left: -1rem !important;
+    }
+
+    > .leaf-testimonial {
+      position: absolute;
+      z-index: -1;
+
+      &.leaf-1 {
+        top: 47px;
+        left: -56px;
+      }
+
+      &.leaf-2 {
+        left: -20px;
+        top: -10px;
+        z-index: -1;
+      }
+
+      &.leaf-3 {
+        right: -30px;
+        top: -16px;
+        z-index: -2;
+      }
+
+      &.leaf-4 {
+        right: -6%;
+        bottom: 58px;
+        z-index: -1;
+      }
+
+      &.leaf-5 {
+        right: 8%;
+        bottom: -33px;
+        z-index: -1;
+      }
+
+      &.leaf-6 {
+        left: 33%;
+        bottom: -40px;
+        transform: translate(-100%, 0%);
+        z-index: -1;
+      }
+
+      &.leaf-7 {
+        bottom: 0;
+        transform: translate(-100%, 0%);
+        left: 6px;
+      }
+    }
+  }
+}
+
+@media (min-width: 550px) and (max-width: 850px) {
+  .testimonial-section {
+    padding: 2rem 0;
+
+    & .testimonial-section__container {
+      & .testimonial-section__swiper {
+        width: 100%;
+      }
+
+      & .swiper-button-next {
+        right: 0 !important;
+      }
+
+      & .swiper-button-prev {
+        left: 0 !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 851px) {
+  .testimonial-section {
+    padding: 2rem 0 3rem;
+
+    & .testimonial-section__container {
+      & .testimonial-section__swiper {
+        width: 100%;
+      }
+
+      & .swiper-button-next {
+        right: -1rem !important;
+      }
+
+      & .swiper-button-prev {
+        left: -1rem !important;
+      }
+    }
+  }
+}

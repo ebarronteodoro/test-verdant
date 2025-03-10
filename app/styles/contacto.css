@@ -1,3 +1,12 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 :root {
   --verde-claro: #97e15b;
   --verde-claro-variant: #a7df6d;
@@ -523,11 +532,11 @@ main {
                   box-shadow: 0px 10px 27px -15px rgba(0, 0, 0, 1.75);
                   position: relative;
                   z-index: 10;
-              
+
                   &:active {
                     transform: scale(0.95);
                   }
-              
+
                   &:hover {
                     color: #99e775;
                     background-color: #033f35;
@@ -758,13 +767,10 @@ main {
           width: 75%;
           justify-content: center;
           gap: clamp(1rem, 2.5vw, 3rem);
-          
 
           & > div {
             align-items: center;
-            transition: all .3s ease;
-
-
+            transition: all 0.3s ease;
 
             & img {
               width: auto;
@@ -779,7 +785,7 @@ main {
               }
             }
 
-            &:hover{
+            &:hover {
               transform: scale(1.2);
             }
           }
@@ -850,10 +856,10 @@ main {
                 height: clamp(50px, 3vw, 60px);
 
                 & > input {
-                  font-size: clamp(0.7rem, .9vw, 1rem);
+                  font-size: clamp(0.7rem, 0.9vw, 1rem);
 
                   &:focus ~ label span {
-                    font-size: clamp(0.7rem, .9vw, 1rem);
+                    font-size: clamp(0.7rem, 0.9vw, 1rem);
                     transform: translate3d(0, -20px, 0);
                   }
                 }
@@ -861,14 +867,14 @@ main {
                   height: clamp(55px, 3vw, 65px);
 
                   & span {
-                    font-size: clamp(0.7rem, .9vw, 1rem);
+                    font-size: clamp(0.7rem, 0.9vw, 1rem);
                   }
                 }
 
                 &.filled {
                   & label {
                     & span {
-                      font-size: clamp(0.7rem, .9vw, 1rem);
+                      font-size: clamp(0.7rem, 0.9vw, 1rem);
                       transform: translate3d(0, -20px, 0);
                     }
                   }
@@ -881,7 +887,7 @@ main {
                   max-width: 48%;
 
                   & select {
-                    font-size: clamp(0.7rem, .9vw, 1rem);
+                    font-size: clamp(0.7rem, 0.9vw, 1rem);
                   }
                 }
               }
@@ -889,7 +895,7 @@ main {
               & .document-container {
                 & > div {
                   & > select {
-                    font-size: clamp(0.7rem, .9vw, 1rem);
+                    font-size: clamp(0.7rem, 0.9vw, 1rem);
                     height: clamp(50px, 3vw, 60px);
                     font-weight: 600;
                   }
@@ -898,10 +904,10 @@ main {
                     height: clamp(50px, 3vw, 60px);
 
                     & > input {
-                      font-size: clamp(0.7rem, .9vw, 1rem);
+                      font-size: clamp(0.7rem, 0.9vw, 1rem);
 
                       &:focus ~ label span {
-                        font-size: clamp(0.7rem, .9vw, 1rem);
+                        font-size: clamp(0.7rem, 0.9vw, 1rem);
                         transform: translate3d(0, -20px, 0);
                       }
                     }
@@ -909,7 +915,7 @@ main {
                     &.filled {
                       & label {
                         & span {
-                          font-size: clamp(0.7rem, .9vw, 1rem);
+                          font-size: clamp(0.7rem, 0.9vw, 1rem);
                           transform: translate3d(0, -20px, 0);
                         }
                       }
@@ -948,7 +954,7 @@ main {
                     min-height: clamp(50px, 6.5vw, 70px);
 
                     &:focus ~ label span {
-                      font-size: clamp(0.7rem, .9vw, 1rem);
+                      font-size: clamp(0.7rem, 0.9vw, 1rem);
                       transform: translate3d(0, -15px, 0);
                     }
                   }
@@ -973,7 +979,7 @@ main {
                   &.filled {
                     & label {
                       & span {
-                        font-size: clamp(0.7rem, .9vw, 1rem);
+                        font-size: clamp(0.7rem, 0.9vw, 1rem);
                         transform: translate3d(0, -15px, 0);
                       }
                     }
