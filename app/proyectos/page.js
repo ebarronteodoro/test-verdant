@@ -1,3 +1,4 @@
+import DontGoComponent from "../components/DontGo";
 import MapSection from "../components/MapSection";
 import ProjectsSection from "../components/ProjectsSection";
 import TimeLine from "../components/TimeLine";
@@ -37,6 +38,7 @@ export default function Home() {
       </section>
       <TimeLine></TimeLine>
       <MapSection></MapSection>
+      <DontGoComponent variant="standard" />
     </Layout>
   );
 }

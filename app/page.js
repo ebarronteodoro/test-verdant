@@ -8,6 +8,7 @@ import MapSection from "./components/MapSection";
 import TimeLine from "./components/TimeLine";
 import ContactForm from "./components/ContactForm";
 import Offers from "./components/Offers";
+import DontGoComponent from "./components/DontGo";
 
 export const metadata = {
   title: "Verdânt Inmobiliaria",
@@ -126,6 +127,7 @@ export default async function Home() {
       <ContactForm></ContactForm>
 
       <Offers></Offers>
+      <DontGoComponent variant="standard" />
     </Layout>
   );
 }

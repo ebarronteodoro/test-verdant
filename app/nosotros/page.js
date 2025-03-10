@@ -10,6 +10,7 @@ import CircularProgressSection from "../components/CircularProgressSection";
 import CertificacionesSection from "../components/CertificacionesSection";
 import Image from "next/image";
 import ContactForm from "../components/ContactForm";
+import DontGoComponent from "../components/DontGo";
 
 export const metadata = {
   title: "Nosotros | Verdant Inmobiliaria",
@@ -66,6 +67,7 @@ export default function Home() {
       <CertificacionesSection />
       <BrandsSection />
       <ContactForm></ContactForm>
+      <DontGoComponent variant="standard" />
     </Layout>
   );
 }
