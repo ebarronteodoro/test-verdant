@@ -4,14 +4,22 @@ import "../styles/components/dontgo.css";
 import { useState, useEffect, useRef } from "react";
 
 // Mapeo de imágenes para cada variante
-const overlayImages = {
+const data = {
   standard: {
     sticker: "/VERDI/StickersVerdi_Mesa de trabajo 1-05.png",
     background: "/bg-leaf.png",
+    title: "¡No te vayas!",
+    text: "¿Ya encontraste tu ",
+    highlightText: "nuevo hogar?",
+    buttonText: "Ver proyectos",
   },
   alternate: {
     sticker: "/VERDI/StickersVerdi_Mesa de trabajo 1-01.png", // Imagen alternativa para el sticker
     background: "/bg-leaf2.png", // Imagen alternativa para el fondo
+    title: "¡No te vayas!",
+    text: "Estoy aquí para ayudarte",
+    highlightText: "",
+    buttonText: "Cotiza",
   },
 };
 
@@ -21,20 +29,21 @@ const DontGoOverlay = ({ variant, onClose }) => {
   const overlayClass =
     variant === "alternate" ? "dontgo-overlay2" : "dontgo-overlay";
   // Obtiene las imágenes según la variante; si no existe la variante, se usa 'standard'
-  const images = overlayImages[variant] || overlayImages.standard;
+  const dataVersions = data[variant] || data.standard;
 
   return (
     <div className={overlayClass} style={{ display: "flex", opacity: 1 }}>
       <div className="dontgo-container">
-        <h1>¡No te vayas!</h1>
+        <h1>{dataVersions.title}</h1>
         <span>
-          ¿Ya encontraste tu <mark>nuevo hogar?</mark>
+          {dataVersions.text}
+          <mark>{dataVersions.highlightText}</mark>
         </span>
         <div>
-          <img src={images.sticker} alt="Verdi no quiere que te vayas" />
-          <a href="proyectos">Ver proyectos</a>
+          <img src={dataVersions.sticker} alt="Verdi no quiere que te vayas" />
+          <a href="proyectos">{dataVersions.buttonText}</a>
         </div>
-        <img src={images.background} alt="Fondo no te vayas" />
+        <img src={dataVersions.background} alt="Fondo no te vayas" />
         <button className="close-button" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
