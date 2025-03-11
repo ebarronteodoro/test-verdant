@@ -1,0 +1,38 @@
+name: Deploy via FTP
+
+on:
+  push:
+    branches:
+      - main  # Cambia la rama según tu preferencia
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies, build and export
+        run: |
+          npm install
+          npm run build
+          npm run export
+
+      - name: Deploy website
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          server-dir: betaverdant/
+          local-dir: out
+          exclude: |
+            .git*
+            .github*
+            node_modules
+            package.json
+            package-lock.json
+            next.config.js
+            .next
