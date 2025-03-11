@@ -1,71 +1,67 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
-import Image from "next/image";
-import Script from "next/script";
+import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import Image from 'next/image'
+import Script from 'next/script'
 
-import "../styles/components/mapSection.css";
-import "../styles/lib/api-tomtom/maps.css";
+import '../styles/components/mapSection.css'
+import '../styles/lib/api-tomtom/maps.css'
 
-export default function MapSection() {
+export default function MapSection () {
+  const pathname = usePathname()
+
   useEffect(() => {
-    function mapa() {
-      if (typeof tt !== "undefined") {
+    // Función que inicializa el mapa
+    function mapa () {
+      if (typeof tt !== 'undefined') {
         try {
-          const apiKey = "302A7dGt1V6VAOSYg7ERJX2hcMqosebt";
-          let zoom_number = window.innerWidth < 700 ? 10 : 11;
+          const apiKey = '302A7dGt1V6VAOSYg7ERJX2hcMqosebt'
+          let zoom_number = window.innerWidth < 700 ? 10 : 11
 
-          let map = tt.map({
+          const map = tt.map({
             key: apiKey,
-            container: "map",
+            container: 'map',
             style:
-              "https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAWVo1NG5nejJlUEd3RmZkRDtjNWNkM2E5My1lNGIwLTQ1NDItYTM1OS1iZTc5YTgzYWE3NDE=/drafts/0.json?key=" +
+              'https://api.tomtom.com/style/2/custom/style/dG9tdG9tQEBAWVo1NG5nejJlUEd3RmZkRDtjNWNkM2E5My1lNGIwLTQ1NDItYTM1OS1iZTc5YTgzYWE3NDE=/drafts/0.json?key=' +
               apiKey,
             center: [-77.01542323246234, -12.084026483790424],
-            zoom: zoom_number,
-          });
+            zoom: zoom_number
+          })
 
-          let activePopup = null;
-          let isMouseDown = false;
+          let activePopup = null
 
           const addCustomMarker = (lngLat, popupContent) => {
-            let customMarker = document.createElement("div");
-            let markerImg = document.createElement("img");
-            markerImg.src = "../ubicacion.png";
-            markerImg.style.width = "40px";
-            markerImg.style.height = "auto";
-            customMarker.appendChild(markerImg);
+            const customMarker = document.createElement('div')
+            const markerImg = document.createElement('img')
+            markerImg.src = '../ubicacion.png'
+            markerImg.style.width = '40px'
+            markerImg.style.height = 'auto'
+            customMarker.appendChild(markerImg)
 
-            let marker = new tt.Marker({ element: customMarker })
+            const marker = new tt.Marker({ element: customMarker })
               .setLngLat(lngLat)
-              .addTo(map);
+              .addTo(map)
 
-            let popup = new tt.Popup({
+            const popup = new tt.Popup({
               offset: [0, -50],
               closeButton: false,
               closeOnClick: false,
-              className: "custom-popup",
-            }).setHTML(popupContent);
+              className: 'custom-popup'
+            }).setHTML(popupContent)
 
-            customMarker.addEventListener("click", (event) => {
-              event.stopPropagation();
-              if (activePopup) activePopup.remove();
-              if (popup !== activePopup) {
-                popup.setLngLat(lngLat).addTo(map);
-                activePopup = popup;
-              }
-            });
+            const showPopup = event => {
+              event.stopPropagation()
+              if (activePopup) activePopup.remove()
+              popup.setLngLat(lngLat).addTo(map)
+              activePopup = popup
+            }
 
-            customMarker.addEventListener("mouseenter", (event) => {
-              event.stopPropagation();
-              if (activePopup) activePopup.remove();
-              if (popup !== activePopup) {
-                popup.setLngLat(lngLat).addTo(map);
-                activePopup = popup;
-              }
-            });
-          };
+            customMarker.addEventListener('click', showPopup)
+            customMarker.addEventListener('mouseenter', showPopup)
+          }
 
+          // Agregar marcadores
           addCustomMarker(
             [-77.06574191135122, -12.08378394649858],
             `
@@ -79,7 +75,7 @@ export default function MapSection() {
                 </div>
               </a>
             `
-          );
+          )
 
           addCustomMarker(
             [-76.97895792825048, -12.083051505807905],
@@ -94,55 +90,72 @@ export default function MapSection() {
                 </div>
               </a>
             `
-          );
+          )
 
-          window.addEventListener("resize", () => map.resize());
+          // Ajuste del mapa cuando se redimensiona la ventana
+          const onResize = () => map.resize()
+          window.addEventListener('resize', onResize)
 
-          document
-            .querySelector(".layer_back")
-            .addEventListener("click", function () {
-              this.classList.remove("layer_back");
-              document.querySelector(".layer_back_p").style.display = "none";
-            });
+          // Ejemplo de limpieza de otro listener agregado
+          const layerEl = document.querySelector('.layer_back')
+          const removeLayerListener = () => {
+            layerEl.classList.remove('layer_back')
+            const layerBackP = document.querySelector('.layer_back_p')
+            if (layerBackP) layerBackP.style.display = 'none'
+          }
+          if (layerEl) {
+            layerEl.addEventListener('click', removeLayerListener)
+          }
+
+          // Devuelve una función de limpieza para remover listeners y destruir el mapa si es posible
+          return () => {
+            window.removeEventListener('resize', onResize)
+            if (layerEl)
+              layerEl.removeEventListener('click', removeLayerListener)
+            if (map) map.remove()
+          }
         } catch (error) {
-          console.error("Error al inicializar el mapa:", error);
+          console.error('Error al inicializar el mapa:', error)
         }
       }
     }
 
-    document.addEventListener("DOMContentLoaded", mapa());
-  }, []);
+    // Llamamos la función directamente dentro del efecto
+    const cleanupMap = mapa()
+
+    // Retornamos la función de limpieza para que se ejecute en el desmontaje o cambio de ruta
+    return () => {
+      if (cleanupMap) cleanupMap()
+    }
+  }, [pathname]) // Se reejecuta cada vez que la ruta cambia
 
   return (
     <>
-      <Script
-        src="../libs/maps-web.min.js"
-        strategy="beforeInteractive" // Carga antes de renderizar
-      />
-      <section className="map-section">
-        <div className="map-section__container">
-          <div className="map-data">
+      <Script src='../libs/maps-web.min.js' strategy='beforeInteractive' />
+      <section className='map-section'>
+        <div className='map-section__container'>
+          <div className='map-data'>
             <span>PROYECTOS</span>
             <h2>
               Descubre el proyecto <span>perfecto para ti</span>
             </h2>
-            <a href="proyectos">Ver Proyectos</a>
+            <a href='proyectos'>Ver Proyectos</a>
           </div>
-          <div className="map-container">
-            <div id="map" className="layer_back">
-              <p className="layer_back_p">¡Haz click aquí para ver el mapa!</p>
+          <div className='map-container'>
+            <div id='map' className='layer_back'>
+              <p className='layer_back_p'>¡Haz click aquí para ver el mapa!</p>
             </div>
           </div>
         </div>
         <picture>
           <Image
-            src="/barra-hojas.png"
-            alt="Barra hojas"
+            src='/barra-hojas.png'
+            alt='Barra hojas'
             width={500}
             height={50}
           />
         </picture>
       </section>
     </>
-  );
+  )
 }

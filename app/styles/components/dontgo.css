@@ -35,6 +35,7 @@
       z-index: -1;
       top: 0;
       left: 0;
+      object-fit: contain;
     }
 
     & > h1 {
@@ -60,6 +61,8 @@
 
       & img {
         width: 8rem;
+        height: auto;
+        object-fit: contain;
       }
 
       & a {
