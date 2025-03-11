@@ -39,7 +39,9 @@
       & .footer__logo {
         width: 100%;
         max-width: 200px;
-        margin: 0 0 70px 0;
+        height: auto;
+        margin: 0 0 70px;
+        object-fit: contain;
       }
 
       & .footer__logos {
@@ -50,6 +52,8 @@
           width: auto;
           max-width: 75px;
           margin: 0 1rem;
+          height: auto;
+          object-fit: contain;
         }
 
         & .footer__logo-partner:nth-child(3) {
@@ -121,6 +125,7 @@
             & .footer__social-icon {
               width: 51px;
               height: 51px;
+              object-fit: contain;
             }
 
             & svg {

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import "../styles/components/dontgo.css";
 
 import { useState, useEffect, useRef } from "react";
@@ -12,6 +13,7 @@ const data = {
     text: "¿Ya encontraste tu ",
     highlightText: "nuevo hogar?",
     buttonText: "Ver proyectos",
+    buttonLink: "/proyectos",
   },
   alternate: {
     sticker: "/VERDI/StickersVerdi_Mesa de trabajo 1-01.png", // Imagen alternativa para el sticker
@@ -20,11 +22,12 @@ const data = {
     text: "Estoy aquí para ayudarte",
     highlightText: "",
     buttonText: "Cotiza",
+    buttonLink: "#cotiza",
   },
 };
 
 // Componente del overlay que renderiza según la variante
-const DontGoOverlay = ({ variant, onClose }) => {
+const DontGoOverlay = ({ variant, onClose, onButtonClick }) => {
   // Define la clase CSS según la variante
   const overlayClass =
     variant === "alternate" ? "dontgo-overlay2" : "dontgo-overlay";
@@ -41,7 +44,9 @@ const DontGoOverlay = ({ variant, onClose }) => {
         </span>
         <div>
           <img src={dataVersions.sticker} alt="Verdi no quiere que te vayas" />
-          <a href="proyectos">{dataVersions.buttonText}</a>
+          <Link href={dataVersions.buttonLink} onClick={onButtonClick}>
+            {dataVersions.buttonText}
+          </Link>
         </div>
         <img src={dataVersions.background} alt="Fondo no te vayas" />
         <button className="close-button" onClick={onClose}>
@@ -110,10 +115,21 @@ const DontGoComponent = ({ variant = "standard" }) => {
     setShowOverlay(false);
   };
 
+  // Función para manejar el clic en el botón "Cotiza" en la variante "alternate"
+  const handleButtonClick = () => {
+    if (variant === "alternate") {
+      closeOverlay();
+    }
+  };
+
   return (
     <div>
       {showOverlay && (
-        <DontGoOverlay variant={variant} onClose={closeOverlay} />
+        <DontGoOverlay
+          variant={variant}
+          onClose={closeOverlay}
+          onButtonClick={handleButtonClick}
+        />
       )}
     </div>
   );

@@ -111,7 +111,7 @@ export default function InfoSection ({ project }) {
               <Image
                 width={200}
                 height={50}
-                priority
+                loading='lazy'
                 src='/details/logo-interbank.webp'
                 alt='Logo Banco'
               />

@@ -1,12 +1,15 @@
 import Link from 'next/link'
 import '../styles/components/footer.css'
+import Image from 'next/image'
 
 export default function Footer () {
   return (
     <footer className='footer'>
       <div className='footer__container'>
         <div className='footer__section footer__branding'>
-          <img
+          <Image
+            width={260}
+            height={60}
             src='/footer/verdant.png'
             alt='Verdant Logo'
             className='footer__logo'
@@ -17,17 +20,23 @@ export default function Footer () {
             San Miguel, Lima - Perú
           </address>
           <div className='footer__logos'>
-            <img
+            <Image
+              width={150}
+              height={80}
               src='/footer/asei-footer.png'
               alt='Logo ASEI'
               className='footer__logo-partner'
             />
-            <img
+            <Image
+              width={150}
+              height={80}
               src='/footer/vivienda-footer.webp'
               alt='Logo Verde'
               className='footer__logo-partner'
             />
-            <img
+            <Image
+              width={150}
+              height={80}
               src='/footer/edge-footer.png'
               alt='Logo Edge'
               className='footer__logo-partner'
@@ -38,8 +47,8 @@ export default function Footer () {
         <div className='footer__section footer__contact'>
           <h3 className='footer__title'>Canales de contacto</h3>
           <div className='footer__contact-form'>
-            <Link href='contacto'>Formulario de contacto</Link>
-            <Link target='_blank' href='https://w.app/verdantinmobiliaria'>
+            <Link href='/contacto'>Formulario de contacto</Link>
+            <Link target='_blank' href='https://wa.link/ahpgbx'>
               ¿Interesado en vender tu terreno?
             </Link>
           </div>
@@ -73,32 +82,36 @@ export default function Footer () {
         <div className='footer__section footer__social'>
           <ul className='footer__social-list'>
             <li className='footer__social-item'>
-              <a
+              <Link
                 href='https://www.linkedin.com/company/verdant-inmobiliaria/'
                 target='_blank'
                 className='footer__social-link'
                 aria-label='Linkedin'
               >
-                <img
+                <Image
+                  width={51}
+                  height={51}
                   src='/footer/social_red_linkedin.png'
                   alt='Linkedin'
                   className='footer__social-icon'
                 />
-              </a>
+              </Link>
             </li>
             <li className='footer__social-item'>
-              <a
+              <Link
                 href='https://beacons.ai/verdant.pe'
                 target='_blank'
                 className='footer__social-link'
                 aria-label='TikTok'
               >
-                <img
+                <Image
+                  width={51}
+                  height={51}
                   src='/footer/social_red_tiktok.png'
                   alt='TikTok'
                   className='footer__social-icon'
                 />
-              </a>
+              </Link>
             </li>
             <li className='footer__social-item'>
               <Link
@@ -107,7 +120,9 @@ export default function Footer () {
                 className='footer__social-link'
                 aria-label='Instagram'
               >
-                {/* <img
+                {/* <Image
+                  width={51}
+                  height={51}
                   src='/footer/instagram.png'
                   alt='Botón de Instagram'
                   className='footer__social-icon'
@@ -128,18 +143,20 @@ export default function Footer () {
               </Link>
             </li>
             <li className='footer__social-item'>
-              <a
+              <Link
                 href='https://beacons.ai/verdant.pe'
                 target='_blank'
                 className='footer__social-link'
                 aria-label='Facebook'
               >
-                <img
+                <Image
+                  width={51}
+                  height={51}
                   src='/footer/social_red_facebook.png'
                   alt='Facebook'
                   className='footer__social-icon'
                 />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

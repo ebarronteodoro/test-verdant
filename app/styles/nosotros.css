@@ -13,7 +13,7 @@ main {
     position: relative;
 
     &::before {
-      content: "";
+      content: '';
       width: 100%;
       height: 50%;
       background-image: -webkit-linear-gradient(
@@ -782,10 +782,8 @@ main {
       & .progress-bar__container {
         & .circular-progress {
           & .progress-indicator {
-            & .progress-indicator {
-              width: 25px;
-              height: 25px;
-            }
+            width: 25px;
+            height: 25px;
           }
         }
       }
@@ -877,10 +875,8 @@ main {
       & .progress-bar__container {
         & .circular-progress {
           & .progress-indicator {
-            & .progress-indicator {
-              width: 25px;
-              height: 25px;
-            }
+            width: 25px;
+            height: 25px;
           }
         }
       }

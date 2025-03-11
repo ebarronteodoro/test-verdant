@@ -6,6 +6,9 @@ import slugify from 'slugify'
 import DetailsGroup from '@/app/components/groups/DetailsGroup'
 import fs from 'fs'
 import path from 'path'
+import InfoSection from '@/app/components/InfoSection'
+import LocationSection from '@/app/components/LocationSection'
+import VivirEnSection from '@/app/components/VivirEnSection'
 
 const projects = [
   {
@@ -64,7 +67,7 @@ const projects = [
   }
 ]
 
-export async function generateStaticParams() {
+export async function generateStaticParams () {
   return projects.map(project => ({
     slug: `departamentos-en-venta-${slugify(project.location, {
       lower: true,
@@ -73,7 +76,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata ({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
   if (slugParts.length < 5) return notFound() // Validar formato del slug
@@ -101,7 +104,7 @@ export async function generateMetadata({ params }) {
 }
 
 // Función de servidor para leer las imágenes de la carpeta del proyecto
-async function getProjectImages(folderName) {
+async function getProjectImages (folderName) {
   const folderPath = path.join(process.cwd(), 'public', folderName)
   try {
     const files = fs.readdirSync(folderPath)
@@ -116,7 +119,7 @@ async function getProjectImages(folderName) {
   }
 }
 
-export default async function ProjectPage({ params }) {
+export default async function ProjectPage ({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
   const projectName = slugParts.slice(-1)[0]
@@ -126,7 +129,6 @@ export default async function ProjectPage({ params }) {
   )
   if (!project) return notFound()
 
-  // Usamos la propiedad "directorio" del proyecto para obtener la ruta de la carpeta en public
   const images = await getProjectImages(project.directorio)
 
   return (
@@ -135,7 +137,7 @@ export default async function ProjectPage({ params }) {
         <picture>
           {project.id === 'soil' ? (
             <Image
-              width={1250}
+              width={800}
               priority
               height={240}
               src='/SOIL/Terraza.jpg'
@@ -143,7 +145,7 @@ export default async function ProjectPage({ params }) {
             />
           ) : project.id === 'seed' ? (
             <Image
-              width={1250}
+              width={800}
               priority
               height={240}
               src='/banner-seed.jpg'
@@ -163,7 +165,17 @@ export default async function ProjectPage({ params }) {
         ) : null}
       </section>
 
+      <InfoSection project={project} />
       <DetailsGroup project={project} images={images} />
+      <LocationSection
+        iframe={project.iframe}
+        ubicacion={project.ubicacion}
+        sala_ventas={project.sala_ventas}
+        horario={project.horario}
+        gmaps_link={project.gmaps_link}
+        waze_link={project.waze_link}
+      />
+      <VivirEnSection project={project.id} />
     </Layout>
   )
 }
