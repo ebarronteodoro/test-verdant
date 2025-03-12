@@ -323,7 +323,9 @@ export default function Offers({ param }) {
                 srcSet="/promociones/promocion.png"
                 media="(min-width: 750px)"
               />
-              <img
+              <Image
+                width={750}
+                height={350}
                 className="promocion"
                 loading="lazy"
                 src="/promociones/PROMO II.png"

@@ -17,7 +17,7 @@ export default function ProjectCard ({
     <article className='proyectos-section__card' data-location={location}>
       <header className='proyectos-section__location'>
         <span className='building-name'>{name}</span>
-        <img src='/icons/location-icon.png' alt='Location Icon' />
+        <Image width={27} height={21} src="/icons/location-icon.png" alt="Location Icon" />
         <address className='building-adress'>{address}</address>
       </header>
       <Link href={link} className='card_content'>
@@ -26,13 +26,13 @@ export default function ProjectCard ({
         <div className='card_img'>
           <Image width={400} height={500} src={imgSrc} alt={`Imagen del Proyecto ${name}`} />
           <div className='icon-container'>
-            <img src='/leaf-hover.png' alt='Hoja animada' />
+            <Image width={125} height={123} src='/leaf-hover.png' alt='Hoja animada' />
           </div>
         </div>
         <div className='card_data'>
           <div className='card_size'>
             <div>
-              <img src='/icons/icon_m2.png' alt='icono m2' />
+              <Image width={21} height={21} src='/icons/icon_m2.png' alt='icono m2' />
               <span>DESDE</span> {minSize} m<sup>2</sup>
             </div>
             <div>
@@ -41,7 +41,7 @@ export default function ProjectCard ({
           </div>
           <div className='card-group__data'>
             <div className='card_bedrooms'>
-              <img src='/icons/bed-icon.png' alt='Icono Cama' />
+              <Image width={21} height={18} src='/icons/bed-icon.png' alt='Icono Cama' />
               <div>
                 <span>DORMS.</span>
                 <br />

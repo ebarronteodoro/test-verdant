@@ -315,6 +315,7 @@ main {
       left: 50%;
       top: clamp(1.5rem, 5vw, 3rem);
       rotate: 90deg;
+      height: auto;
     }
 
     & h3 {

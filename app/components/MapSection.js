@@ -65,30 +65,30 @@ export default function MapSection () {
           addCustomMarker(
             [-77.06574191135122, -12.08378394649858],
             `
-              <a href="/proyecto-soil" class="popup-content">
+              <Link href="/proyectos/departamentos-en-venta-pueblo-libre-soil" class="popup-content">
                 <span class="location">PUEBLO LIBRE</span>
                 <span class="status">EN CONSTRUCCIÓN</span>
-                <img src="../soil-project.png" alt="Edificio Soil" />
+                <Image width={230} height={290} src="/soil-project.png" alt="Edificio Soil" />
                 <div>
                   <span class="name">SOIL</span>
-                  <div class="address"><img src="../location-icon.png" alt="Location Icon"><span>Av. La Marina 425</span></div>
+                  <div class="address"><Image width={13} height={16} src="/icons/location-icon.png" alt="Location Icon /"><span>Av. La Marina 425</span></div>
                 </div>
-              </a>
+              </Link>
             `
           )
 
           addCustomMarker(
             [-76.97895792825048, -12.083051505807905],
             `
-              <a href="/proyecto-seed" class="popup-content">
+              <Link href="/proyecto-seed" class="popup-content">
                 <span class="location">SURCO</span>
                 <span class="status">ENTREGA INMEDIATA</span>
-                <img src="../seed-project.png" alt="Edificio Seed" />
+                <Image width={230} height={290} src="/seed-project.png" alt="Edificio Seed" />
                 <div>
                   <span class="name">SEED</span>
-                  <div class="address"><img src="../location-icon.png" alt="Location Icon"><span>Jr. República de Líbano 1735</span></div>
+                  <div class="address"><Image width={13} height={16} src="/icons/location-icon.png" alt="Location Icon" /><span>Jr. República de Líbano 1735</span></div>
                 </div>
-              </a>
+              </Link>
             `
           )
 

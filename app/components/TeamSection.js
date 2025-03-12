@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import TeamCard from './TeamCard'
+import Image from 'next/image'
 
 const teamMembers = [
   {
@@ -90,7 +91,7 @@ export default function TeamSection () {
 
   return (
     <section className='team-section'>
-      <img src='/flecha-gris.png' alt='Flecha guía' />
+      <Image width={150} height={300} src='/flecha-gris.png' alt='Flecha guía' />
       <h3>
         Estamos para <mark>ofrecerte lo mejor</mark>
       </h3>

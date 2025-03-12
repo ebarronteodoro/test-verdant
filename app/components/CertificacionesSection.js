@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect } from 'react'
 
 export default function CertificacionesSection () {
@@ -63,7 +64,9 @@ export default function CertificacionesSection () {
           </p>
         </div>
         <picture>
-          <img
+          <Image
+            width={480}
+            height={480}
             className='zoom-out-image'
             src='/nosotros/seed-dron-picture.png'
             alt='Fotografía de Seed tomada con un dron'
@@ -73,7 +76,12 @@ export default function CertificacionesSection () {
           <article>
             <header>
               <figure>
-                <img src='/nosotros/asei-footer.png' alt='Logotipo de ASEI' />
+                <Image
+                  width={180}
+                  height={100}
+                  src='/nosotros/asei-footer.png'
+                  alt='Logotipo de ASEI'
+                />
                 <figcaption>
                   Asociación De Empresas Inmobiliarias Del Perú
                 </figcaption>
@@ -100,7 +108,9 @@ export default function CertificacionesSection () {
           <article>
             <header>
               <figure>
-                <img
+                <Image
+                  width={180}
+                  height={100}
                   src='/nosotros/vivienda-footer.webp'
                   alt='Logotipo de Mi Vivienda Verde'
                 />
@@ -128,7 +138,12 @@ export default function CertificacionesSection () {
           <article>
             <header>
               <figure>
-                <img src='/nosotros/edge-footer.png' alt='Logotipo de Edge' />
+                <Image
+                  width={180}
+                  height={100}
+                  src='/nosotros/edge-footer.png'
+                  alt='Logotipo de Edge'
+                />
                 <figcaption>Certificación Edge</figcaption>
               </figure>
             </header>

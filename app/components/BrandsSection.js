@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function BrandsSection() {
   return (
     <section className='brands-section'>
@@ -9,7 +11,7 @@ export default function BrandsSection() {
           { img: "LOGO_SOS.png", label: "SOS 911 SAC" }
         ].map(({ img, label }, index) => (
           <figure key={index}>
-            <img src={`/nosotros/socios/${img}`} alt={`Logotipo de ${label}`} />
+            <Image width={160} height={100} src={`/nosotros/socios/${img}`} alt={`Logotipo de ${label}`} />
             <figcaption>{label}</figcaption>
           </figure>
         ))}

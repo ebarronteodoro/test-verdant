@@ -1103,6 +1103,8 @@ main {
           left: -100px;
           top: 82px;
           z-index: 0;
+          height: auto;
+          object-fit: contain;
         }
       }
 
@@ -1190,6 +1192,8 @@ main {
           width: 130px;
           bottom: 40px;
           right: -100px;
+          height: auto;
+          object-fit: contain;
         }
 
         & h3 {
@@ -1369,6 +1373,7 @@ main {
           right: -20px;
           width: 100px;
           bottom: 40px;
+          object-fit: contain;
         }
 
         & h2 {
@@ -1392,6 +1397,7 @@ main {
           & img {
             width: 18px;
             height: auto;
+            object-fit: contain;
           }
         }
 
@@ -1426,6 +1432,7 @@ main {
             & img {
               width: auto;
               height: 35px;
+              object-fit: contain;
             }
 
             &:first-of-type {
