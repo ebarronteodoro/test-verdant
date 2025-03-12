@@ -3,7 +3,7 @@ name: Deploy via FTP
 on:
   push:
     branches:
-      - main  # Cambia la rama según tu preferencia
+      - master  # Cambia la rama según tu preferencia
 
 jobs:
   deploy:
