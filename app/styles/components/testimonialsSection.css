@@ -1,3 +1,12 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 .testimonial-section {
   /* background: #fff; */
   padding: 2.5rem 0;
@@ -30,6 +39,7 @@
       padding: 1rem 0 !important;
 
       & .swiper-slide {
+        box-sizing: border-box;
         & .testimonial-section__card {
           transition: all 0.3s ease;
           background: #d6ecc0;
@@ -120,22 +130,26 @@
       &.leaf-1 {
         top: 47px;
         left: -56px;
+        width: 65px;
       }
 
       &.leaf-2 {
         left: -20px;
         top: -10px;
+        width: 65px;
         z-index: -1;
       }
 
       &.leaf-3 {
         right: -30px;
         top: -16px;
+        width: 88px;
         z-index: -2;
       }
 
       &.leaf-4 {
         right: -6%;
+        width: 64px;
         bottom: 58px;
         z-index: -1;
       }
@@ -143,6 +157,7 @@
       &.leaf-5 {
         right: 8%;
         bottom: -33px;
+        width: 75px;
         z-index: -1;
       }
 
@@ -150,12 +165,14 @@
         left: 33%;
         bottom: -40px;
         transform: translate(-100%, 0%);
+        width: 69px;
         z-index: -1;
       }
 
       &.leaf-7 {
         bottom: 0;
         transform: translate(-100%, 0%);
+        width: 59px;
         left: 6px;
       }
     }
