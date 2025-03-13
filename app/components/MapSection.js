@@ -12,7 +12,6 @@ export default function MapSection () {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Función que inicializa el mapa
     function mapa () {
       if (typeof tt !== 'undefined') {
         try {
@@ -34,9 +33,12 @@ export default function MapSection () {
           const addCustomMarker = (lngLat, popupContent) => {
             const customMarker = document.createElement('div')
             const markerImg = document.createElement('img')
-            markerImg.src = '../ubicacion.png'
+            markerImg.src = '/ubicacion.png'
+            markerImg.width = '40'
+            markerImg.height = '60'
             markerImg.style.width = '40px'
             markerImg.style.height = 'auto'
+            markerImg.alt = 'Icono de ubicación'
             customMarker.appendChild(markerImg)
 
             const marker = new tt.Marker({ element: customMarker })
@@ -65,7 +67,7 @@ export default function MapSection () {
           addCustomMarker(
             [-77.06574191135122, -12.08378394649858],
             `
-              <Link href="/proyectos/departamentos-en-venta-pueblo-libre-soil" class="popup-content">
+              <a href="/proyectos/departamentos-en-venta-pueblo-libre-soil" class="popup-content">
                 <span class="location">PUEBLO LIBRE</span>
                 <span class="status">EN CONSTRUCCIÓN</span>
                 <Image width={230} height={290} src="/soil-project.png" alt="Edificio Soil" />
@@ -73,14 +75,14 @@ export default function MapSection () {
                   <span class="name">SOIL</span>
                   <div class="address"><Image width={13} height={16} src="/icons/location-icon.png" alt="Location Icon /"><span>Av. La Marina 425</span></div>
                 </div>
-              </Link>
+              </a>
             `
           )
 
           addCustomMarker(
             [-76.97895792825048, -12.083051505807905],
             `
-              <Link href="/proyecto-seed" class="popup-content">
+              <a href="/proyecto-seed" class="popup-content">
                 <span class="location">SURCO</span>
                 <span class="status">ENTREGA INMEDIATA</span>
                 <Image width={230} height={290} src="/seed-project.png" alt="Edificio Seed" />
@@ -88,15 +90,30 @@ export default function MapSection () {
                   <span class="name">SEED</span>
                   <div class="address"><Image width={13} height={16} src="/icons/location-icon.png" alt="Location Icon" /><span>Jr. República de Líbano 1735</span></div>
                 </div>
-              </Link>
+              </a>
             `
           )
 
-          // Ajuste del mapa cuando se redimensiona la ventana
-          const onResize = () => map.resize()
+          // Ajuste del mapa al redimensionar la ventana
+          const onResize = () => {
+            map.resize()
+            removeAttribution()
+          }
           window.addEventListener('resize', onResize)
 
-          // Ejemplo de limpieza de otro listener agregado
+          // Función para remover el link de atribución de TomTom
+          const removeAttribution = () => {
+            const attributionLink = document.querySelector('a.tomtomAttribution')
+            if (attributionLink) {
+              // Asignar rel="nofollow" antes de eliminarlo
+              attributionLink.setAttribute('rel', 'nofollow')
+              attributionLink.remove()
+            }
+          }
+          // Ejecuta la remoción pasados 2 segundos
+          const attributionTimeout = setTimeout(removeAttribution, 2000)
+
+          // Ejemplo de listener de otro elemento
           const layerEl = document.querySelector('.layer_back')
           const removeLayerListener = () => {
             layerEl.classList.remove('layer_back')
@@ -107,9 +124,10 @@ export default function MapSection () {
             layerEl.addEventListener('click', removeLayerListener)
           }
 
-          // Devuelve una función de limpieza para remover listeners y destruir el mapa si es posible
+          // Devuelve función de limpieza para remover listeners y destruir el mapa
           return () => {
             window.removeEventListener('resize', onResize)
+            clearTimeout(attributionTimeout)
             if (layerEl)
               layerEl.removeEventListener('click', removeLayerListener)
             if (map) map.remove()
@@ -120,18 +138,16 @@ export default function MapSection () {
       }
     }
 
-    // Llamamos la función directamente dentro del efecto
     const cleanupMap = mapa()
 
-    // Retornamos la función de limpieza para que se ejecute en el desmontaje o cambio de ruta
     return () => {
       if (cleanupMap) cleanupMap()
     }
-  }, [pathname]) // Se reejecuta cada vez que la ruta cambia
+  }, [pathname])
 
   return (
     <>
-      <Script src='../libs/maps-web.min.js' strategy='beforeInteractive' />
+      <Script src='/libs/maps-web.min.js' strategy='beforeInteractive' />
       <section className='map-section'>
         <div className='map-section__container'>
           <div className='map-data'>

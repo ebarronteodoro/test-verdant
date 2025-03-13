@@ -13,6 +13,12 @@ html {
   text-decoration: none;
   list-style: none;
   scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+a.tomtomAttribution {
+  display: none !important;
+  visibility: hidden !important;
 }
 
 input,
