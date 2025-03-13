@@ -23,7 +23,10 @@ export default function TypologyFetcher ({ projectId }) {
           `/api/typology_features?project=${projectId}`,
           {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': 'verdant-key'
+            },
             cache: 'no-store'
           }
         )
