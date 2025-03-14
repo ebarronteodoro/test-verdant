@@ -1,24 +1,26 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from "next/link";
+import Image from "next/image";
 
-export default function VivirEnSection ({ project }) {
-  if (project === 'soil') {
+export default function VivirEnSection({ project }) {
+  if (project === "soil") {
     return (
-      <section className='map-section'>
-        <div className='map-section__container'>
-          <div className='map-data'>
+      <section className="map-section">
+        <div className="map-section__container">
+          <div className="map-data">
             <span>PROYECTOS</span>
             <h2>¿Te gustaría vivir en Surco?</h2>
-            <Link href='/proyectos/departamentos-en-venta-surco-seed'>Ver Proyectos</Link>
+            <Link href="/proyectos/departamentos-en-venta-surco-seed">
+              Ver Proyectos
+            </Link>
           </div>
-          <div className='map-container'>
-            <div id='map' className='layer_back'>
-              <Link href='/proyectos/departamentos-en-venta-surco-seed'>
+          <div className="map-container">
+            <div id="map" className="layer_back">
+              <Link href="/proyectos/departamentos-en-venta-surco-seed">
                 <Image
-                  src='/details/seed-card.png'
-                  alt='Seed Edificio'
+                  src="/details/seed-card.png"
+                  alt="Seed Edificio"
                   width={400} // Ajusta según tus necesidades
                   height={300}
                 />
@@ -28,31 +30,33 @@ export default function VivirEnSection ({ project }) {
         </div>
         <picture>
           <Image
-            src='/barra-hojas.png'
-            alt='Barra hojas'
+            src="/barra-hojas.png"
+            alt="Barra hojas"
             width={800} // Ajusta según tus necesidades
             height={100}
           />
         </picture>
       </section>
-    )
+    );
   }
 
-  if (project === 'seed') {
+  if (project === "seed") {
     return (
-      <section className='map-section'>
-        <div className='map-section__container'>
-          <div className='map-data'>
+      <section className="map-section">
+        <div className="map-section__container">
+          <div className="map-data">
             <span>PROYECTOS</span>
             <h2>¿Te gustaría vivir en Pueblo Libre?</h2>
-            <Link href='/proyectos/departamentos-en-venta-pueblo-libre-soil'>Ver Proyectos</Link>
+            <Link href="/proyectos/departamentos-en-venta-pueblo-libre-soil">
+              Ver Proyectos
+            </Link>
           </div>
-          <div className='map-container'>
-            <div id='map' className='layer_back'>
-              <Link href='/proyectos/departamentos-en-venta-pueblo-libre-soil'>
+          <div className="map-container">
+            <div id="map" className="layer_back">
+              <Link href="/proyectos/departamentos-en-venta-pueblo-libre-soil">
                 <Image
-                  src='/details/SOIL familia.jpg'
-                  alt='Vive en Soil Pueblo Libre'
+                  src="/details/SOIL_familia.jpg"
+                  alt="Vive en Soil Pueblo Libre"
                   width={400} // Ajusta según tus necesidades
                   height={300}
                 />
@@ -62,15 +66,15 @@ export default function VivirEnSection ({ project }) {
         </div>
         <picture>
           <Image
-            src='/barra-hojas.png'
-            alt='Barra hojas'
+            src="/barra-hojas.png"
+            alt="Barra hojas"
             width={800} // Ajusta según tus necesidades
             height={100}
           />
         </picture>
       </section>
-    )
+    );
   }
 
-  return null
+  return null;
 }

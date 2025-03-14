@@ -328,7 +328,7 @@ export default function Offers({ param }) {
                 height={350}
                 className="promocion"
                 loading="lazy"
-                src="/promociones/PROMO II.png"
+                src="/promociones/PROMO_II.png"
                 alt="Proyecto Seed"
               />
             </picture>

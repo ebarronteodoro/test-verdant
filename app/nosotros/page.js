@@ -29,7 +29,7 @@ export default function Home() {
             width={1000}
             height={500}
             priority
-            src="/nosotros/Verdant team.png"
+            src="/nosotros/Verdant_team.png"
             alt="Equipo de Verdânt"
           />
         </picture>
