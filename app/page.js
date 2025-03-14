@@ -14,8 +14,8 @@ import Image from 'next/image'
 export const metadata = {
   title: 'Verdânt Inmobiliaria',
   description:
-    'Descubre los mejores proyectos inmobiliarios con Verdânt. Encuentra tu nuevo hogar con las mejores ubicaciones y diseños modernos.',
-  keywords: 'proyectos inmobiliarios, departamentos, Verdânt'
+    'Descubre Verdânt Inmobiliaria, líder en venta de departamentos sostenibles en Lima. Encuentra tu próximo hogar en las mejores ubicaciones',
+  keywords: 'proyectos inmobiliarios, departamentos, Verdânt, venta de departamentos en lima, inmobiliaria lima'
 }
 
 export default async function Home () {

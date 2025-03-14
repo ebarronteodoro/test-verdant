@@ -9,8 +9,8 @@ import '../styles/proyectos.css'
 export const metadata = {
   title: 'Proyectos | Verdant Inmobiliaria',
   description:
-    'Descubre los mejores proyectos inmobiliarios con Verdant. Encuentra tu nuevo hogar con las mejores ubicaciones y diseños modernos.',
-  keywords: 'proyectos inmobiliarios, departamentos, Verdant'
+    'Explora nuestros proyectos de departamentos en Lima. Diseños modernos, excelente ubicación y calidad garantizada. ¡Conoce más aquí!',
+  keywords: 'proyectos inmobiliarios, departamentos, Verdant, proyectos inmobiliarios lima'
 }
 
 export default function Home () {

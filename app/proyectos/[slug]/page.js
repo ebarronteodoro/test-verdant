@@ -36,7 +36,11 @@ const projects = [
       'https://www.google.com/maps/place/Proyecto+Soil/@-12.0838136,-77.0683315,17z',
     waze_link:
       'https://www.waze.com/es/live-map/directions/pe/provincia-de-lima/lima/proyecto-soil?navigate=yes',
-    iframe: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.413586879796!2d-77.06833149044587!3d-12.083813588106487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c9b1b854b5bd%3A0xf0932df9d532bc99!2sProyecto%20Soil!5e0!3m2!1ses-419!2spe!4v1734528124733!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`
+    iframe: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.413586879796!2d-77.06833149044587!3d-12.083813588106487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c9b1b854b5bd%3A0xf0932df9d532bc99!2sProyecto%20Soil!5e0!3m2!1ses-419!2spe!4v1734528124733!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`,
+    metaDescription:
+      'Departamentos en construcción en Pueblo Libre. Proyecto Soil ofrece diseño moderno, áreas verdes y excelente ubicación. ¡Cotiza el tuyo hoy!',
+    keywords:
+      'Soil, Pueblo Libre, departamentos en construcción, modernos, áreas verdes, proyecto inmobiliario pueblo libre'
   },
   {
     id: 'seed',
@@ -63,7 +67,11 @@ const projects = [
       'https://www.google.com/maps/place/Proyecto+Seed/@-12.0830611,-76.9789944,17z',
     waze_link:
       'https://www.waze.com/es/live-map/directions/pe/provincia-de-lima/lima/proyecto-seed?navigate=yes',
-    iframe: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.4245562252313!2d-76.98157469044588!3d-12.083061088107181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7ff830c6de5%3A0x8985a33e1f3ba0ee!2sProyecto%20Seed!5e0!3m2!1ses-419!2spe!4v1734528913352!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`
+    iframe: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.4245562252313!2d-76.98157469044588!3d-12.083061088107181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7ff830c6de5%3A0x8985a33e1f3ba0ee!2sProyecto%20Seed!5e0!3m2!1ses-419!2spe!4v1734528913352!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`,
+    metaDescription:
+      'Últimos departamentos en Surco con entrega inmediata. Vive en Seed, un proyecto moderno en una zona privilegiada. ¡Separa el tuyo ahora!',
+    keywords:
+      'Seed, Surco, departamentos modernos, entrega inmediata, exclusivos, proyecto inmobiliarios en surco'
   }
 ]
 
@@ -99,7 +107,7 @@ export async function generateMetadata ({ params }) {
       project.location.charAt(0).toUpperCase() +
       project.location.slice(1).toLowerCase()
     }`,
-    description: `Encuentra tu departamento ideal en ${project.location}. ${project.title} te ofrece departamentos desde ${project.price}. ¡Conoce más aquí!`
+    description: project.metaDescription
   }
 }
 
