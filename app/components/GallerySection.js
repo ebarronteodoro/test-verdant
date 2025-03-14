@@ -57,12 +57,12 @@ const GallerySectionClient = ({ images }) => {
               <picture>
                 <Image
                   src={image}
-                  alt={`Imagen de ${getImageName(image)}`}
+                  alt={`Imagen de {getImageName(image).replace(/_/g, ' ')}`}
                   width={1500}
                   height={600}
                   loading='lazy'
                 />
-                <h3>{getImageName(image)}</h3>
+                <h3>{getImageName(image).replace(/_/g, ' ')}</h3>
               </picture>
             </SwiperSlide>
           ))}
@@ -84,12 +84,12 @@ const GallerySectionClient = ({ images }) => {
             <SwiperSlide key={index}>
               <Image
                 src={image}
-                alt={`Miniatura de ${getImageName(image)}`}
+                alt={`Miniatura de ${getImageName(image).replace(/_/g, ' ')}`}
                 width={300}
                 height={120}
                 loading='lazy'
               />
-              <h3>{getImageName(image)}</h3>
+              <h3>{getImageName(image).replace(/_/g, ' ')}</h3>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -114,12 +114,12 @@ const GallerySectionClient = ({ images }) => {
             >
               <Image
                 src={image}
-                alt={`Imagen de ${getImageName(image)}`}
+                alt={`Imagen de ${getImageName(image).replace(/_/g, ' ')}`}
                 width={index % 5 === 0 ? 600 : 300}
                 height={index % 5 === 0 ? 5000 : 200}
                 loading='lazy'
               />
-              <h3>{getImageName(image)}</h3>
+              <h3>{getImageName(image).replace(/_/g, ' ')}</h3>
             </div>
           ))}
         </Masonry>
