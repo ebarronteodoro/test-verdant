@@ -75,6 +75,8 @@ main {
         & img {
           width: 50%;
           margin: 0 auto;
+          height: auto;
+          object-fit: contain;
         }
       }
     }
@@ -96,6 +98,7 @@ main {
 
           & img {
             width: 2.5rem;
+            object-fit: contain;
           }
 
           & p {
@@ -130,6 +133,8 @@ main {
       display: flex;
       position: absolute;
       width: 25%;
+      height: auto;
+      object-fit: contain;
 
       &.flecha_1 {
         left: 0;
@@ -175,6 +180,8 @@ main {
 
             & img {
               width: 100%;
+              height: auto;
+              object-fit: contain;
             }
           }
 
@@ -295,7 +302,7 @@ main {
                 }
 
                 &::after {
-                  content: "";
+                  content: '';
                   position: absolute;
                   right: 10px;
                   top: 50%;
@@ -551,6 +558,8 @@ main {
       > .leaf-testimonial {
         position: absolute;
         z-index: -10;
+        height: auto;
+        object-fit: contain;
 
         &.leaf-1 {
           top: 47px;
@@ -615,6 +624,7 @@ main {
         position: absolute;
         bottom: 0;
         z-index: 0;
+        object-fit: contain;
       }
     }
   }

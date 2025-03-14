@@ -134,7 +134,7 @@ const DontGoComponent = ({ variant = "standard" }) => {
   };
 
   return (
-    <div>
+    <>
       {showOverlay && (
         <DontGoOverlay
           variant={variant}
@@ -142,7 +142,7 @@ const DontGoComponent = ({ variant = "standard" }) => {
           onButtonClick={handleButtonClick}
         />
       )}
-    </div>
+    </>
   );
 };
 

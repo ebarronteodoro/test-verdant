@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/icons/ISOTIPO_VERDANT.svg" />
       </head>
       <body className={poppinsSans.className}>
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );
