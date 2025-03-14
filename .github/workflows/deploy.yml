@@ -22,8 +22,8 @@ jobs:
           port: 21
           server-dir: /
           exclude: |
-            .git*
-            .github*
+            .git
+            .github
             node_modules
             package-lock.json
             .next
