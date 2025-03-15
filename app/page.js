@@ -10,17 +10,20 @@ import ContactForm from './components/ContactForm'
 import Offers from './components/Offers'
 import DontGoComponent from './components/DontGo'
 import Image from 'next/image'
+import LoadingOverlay from './components/LoadingOverlay'
 
 export const metadata = {
   title: 'Verdânt Inmobiliaria',
   description:
     'Descubre Verdânt Inmobiliaria, líder en venta de departamentos sostenibles en Lima. Encuentra tu próximo hogar en las mejores ubicaciones',
-  keywords: 'proyectos inmobiliarios, departamentos, Verdânt, venta de departamentos en lima, inmobiliaria lima'
+  keywords:
+    'proyectos inmobiliarios, departamentos, Verdânt, venta de departamentos en lima, inmobiliaria lima'
 }
 
 export default async function Home () {
   return (
     <Layout>
+      <LoadingOverlay />
       <FilterSection />
 
       <section className='projects-section'>
