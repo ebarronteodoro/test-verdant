@@ -23,7 +23,8 @@ a.tomtomAttribution {
 
 input,
 button,
-select {
+select,
+textarea {
   font-family: inherit !important;
 }
 

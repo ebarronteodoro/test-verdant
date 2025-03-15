@@ -46,7 +46,7 @@ export default function ProjectsSection({ param }) {
       <div className="proyectos-section__container">
         <div className="double_container">
           {projects.map((project, index) => {
-            const slug = `departamentos-en-venta-${slugify(project.location, {
+            const slug = `${slugify(project.location, {
               lower: true,
               strict: true,
             })}-${slugify(project.name, { lower: true, strict: true })}`;
@@ -63,7 +63,7 @@ export default function ProjectsSection({ param }) {
                   maxSize={project.maxSize}
                   rooms={project.rooms}
                   price={project.price}
-                  link={`/proyectos/${slug}`}
+                  link={`/venta-departamentos/${slug}`}
                 />
               </div>
             );
@@ -71,7 +71,7 @@ export default function ProjectsSection({ param }) {
         </div>
       </div>
       <div className="proyectos-section__button">
-        <Link href="/proyectos">Ver más proyectos</Link>
+        <Link href="/venta-departamentos">Ver más proyectos</Link>
         <Image
           width={2000}
           height={120}

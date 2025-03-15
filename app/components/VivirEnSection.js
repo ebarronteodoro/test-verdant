@@ -11,13 +11,13 @@ export default function VivirEnSection({ project }) {
           <div className="map-data">
             <span>PROYECTOS</span>
             <h2>¿Te gustaría vivir en Surco?</h2>
-            <Link href="/proyectos/departamentos-en-venta-surco-seed">
+            <Link href="/venta-departamentos/surco-seed">
               Ver Proyectos
             </Link>
           </div>
           <div className="map-container">
             <div id="map" className="layer_back">
-              <Link href="/proyectos/departamentos-en-venta-surco-seed">
+              <Link href="/venta-departamentos/surco-seed">
                 <Image
                   src="/details/seed-card.png"
                   alt="Seed Edificio"
@@ -47,13 +47,13 @@ export default function VivirEnSection({ project }) {
           <div className="map-data">
             <span>PROYECTOS</span>
             <h2>¿Te gustaría vivir en Pueblo Libre?</h2>
-            <Link href="/proyectos/departamentos-en-venta-pueblo-libre-soil">
+            <Link href="/venta-departamentos/pueblo-libre-soil">
               Ver Proyectos
             </Link>
           </div>
           <div className="map-container">
             <div id="map" className="layer_back">
-              <Link href="/proyectos/departamentos-en-venta-pueblo-libre-soil">
+              <Link href="/venta-departamentos/pueblo-libre-soil">
                 <Image
                   src="/details/SOIL_familia.jpg"
                   alt="Vive en Soil Pueblo Libre"

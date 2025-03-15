@@ -5,17 +5,20 @@ import ProjectsSection from '../components/ProjectsSection'
 import TimeLine from '../components/TimeLine'
 import Layout from '../Layouts/layout'
 import '../styles/proyectos.css'
+import LoadingOverlay from '../components/LoadingOverlay'
 
 export const metadata = {
   title: 'Proyectos | Verdant Inmobiliaria',
   description:
     'Explora nuestros proyectos de departamentos en Lima. Diseños modernos, excelente ubicación y calidad garantizada. ¡Conoce más aquí!',
-  keywords: 'proyectos inmobiliarios, departamentos, Verdant, proyectos inmobiliarios lima'
+  keywords:
+    'proyectos inmobiliarios, departamentos, Verdant, proyectos inmobiliarios lima'
 }
 
 export default function Home () {
   return (
     <Layout>
+      <LoadingOverlay />
       <section className='insale_proyects-section'>
         <Image
           width={80}
@@ -62,7 +65,7 @@ export default function Home () {
         <ProjectsSection param='proyectos' />
       </section>
       <TimeLine></TimeLine>
-      <MapSection></MapSection>
+      <MapSection tomtom_apikey={process.env.MAP_APIKEY}></MapSection>
       <DontGoComponent variant='standard' />
     </Layout>
   )

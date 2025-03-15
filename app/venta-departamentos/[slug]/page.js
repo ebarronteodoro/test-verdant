@@ -9,6 +9,7 @@ import path from 'path'
 import InfoSection from '@/app/components/InfoSection'
 import LocationSection from '@/app/components/LocationSection'
 import VivirEnSection from '@/app/components/VivirEnSection'
+import LoadingOverlay from '@/app/components/LoadingOverlay'
 
 const projects = [
   {
@@ -77,7 +78,7 @@ const projects = [
 
 export async function generateStaticParams () {
   return projects.map(project => ({
-    slug: `departamentos-en-venta-${slugify(project.location, {
+    slug: `${slugify(project.location || project.distrito, {
       lower: true,
       strict: true
     })}-${slugify(project.name, { lower: true, strict: true })}`
@@ -87,23 +88,24 @@ export async function generateStaticParams () {
 export async function generateMetadata ({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
-  if (slugParts.length < 5) return notFound() // Validar formato del slug
+  if (slugParts.length < 2) return notFound() // Validar formato del slug
 
-  const projectLocation = slugParts.slice(3, -1).join('-') // Extrae la ubicación
-  const projectName = slugParts.slice(-1)[0] // Extrae el nombre
+  const projectName = slugParts.slice(-1)[0]
+  const projectLocation = slugParts.slice(0, -1).join('-')
 
   const project = projects.find(
     p =>
       slugify(p.name, { lower: true, strict: true }) === projectName &&
-      slugify(p.location, { lower: true, strict: true }) === projectLocation
+      slugify(p.location || p.distrito, { lower: true, strict: true }) ===
+        projectLocation
   )
 
   if (!project) return notFound()
 
   return {
-    title: `${
+    title: `Proyecto ${
       project.name.charAt(0).toUpperCase() + project.name.slice(1).toLowerCase()
-    } | Departamentos en Venta en ${
+    } | Proyecto Inmobiliario en ${
       project.location.charAt(0).toUpperCase() +
       project.location.slice(1).toLowerCase()
     }`,
@@ -111,12 +113,10 @@ export async function generateMetadata ({ params }) {
   }
 }
 
-// Función de servidor para leer las imágenes de la carpeta del proyecto
 async function getProjectImages (folderName) {
   const folderPath = path.join(process.cwd(), 'public', folderName)
   try {
     const files = fs.readdirSync(folderPath)
-    // Filtramos archivos de imagen (jpg, jpeg, png, gif, webp)
     const images = files
       .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
       .map(file => `/${folderName}/${file}`)
@@ -130,17 +130,25 @@ async function getProjectImages (folderName) {
 export default async function ProjectPage ({ params }) {
   const { slug } = await params
   const slugParts = slug.split('-')
+  if (slugParts.length < 2) return notFound()
+
   const projectName = slugParts.slice(-1)[0]
+  const projectLocation = slugParts.slice(0, -1).join('-')
 
   const project = projects.find(
-    p => slugify(p.name, { lower: true, strict: true }) === projectName
+    p =>
+      slugify(p.name, { lower: true, strict: true }) === projectName &&
+      slugify(p.location || p.distrito, { lower: true, strict: true }) ===
+        projectLocation
   )
+
   if (!project) return notFound()
 
   const images = await getProjectImages(project.directorio)
 
   return (
     <Layout>
+      <LoadingOverlay />
       <section className='intro-section'>
         <picture>
           {project.id === 'soil' ? (

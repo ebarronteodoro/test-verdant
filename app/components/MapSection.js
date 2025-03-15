@@ -8,14 +8,15 @@ import Script from 'next/script'
 import '../styles/components/mapSection.css'
 import '../styles/lib/api-tomtom/maps.css'
 
-export default function MapSection () {
+export default function MapSection ({ tomtom_apikey }) {
   const pathname = usePathname()
 
   useEffect(() => {
     function mapa () {
       if (typeof tt !== 'undefined') {
         try {
-          const apiKey = '302A7dGt1V6VAOSYg7ERJX2hcMqosebt'
+
+          const apiKey = tomtom_apikey
           let zoom_number = window.innerWidth < 700 ? 10 : 11
 
           const map = tt.map({
@@ -67,7 +68,7 @@ export default function MapSection () {
           addCustomMarker(
             [-77.06574191135122, -12.08378394649858],
             `
-              <a href="/proyectos/departamentos-en-venta-pueblo-libre-soil" class="popup-content">
+              <a href="/venta-departamentos/pueblo-libre-soil" class="popup-content">
                 <span class="location">PUEBLO LIBRE</span>
                 <span class="status">EN CONSTRUCCIÓN</span>
                 <Image width={230} height={290} src="/soil-project.png" alt="Edificio Soil" />
@@ -82,7 +83,7 @@ export default function MapSection () {
           addCustomMarker(
             [-76.97895792825048, -12.083051505807905],
             `
-              <a href="/proyecto-seed" class="popup-content">
+              <a href="/venta-departamentos/surco-seed" class="popup-content">
                 <span class="location">SURCO</span>
                 <span class="status">ENTREGA INMEDIATA</span>
                 <Image width={230} height={290} src="/seed-project.png" alt="Edificio Seed" />
@@ -103,7 +104,9 @@ export default function MapSection () {
 
           // Función para remover el link de atribución de TomTom
           const removeAttribution = () => {
-            const attributionLink = document.querySelector('a.tomtomAttribution')
+            const attributionLink = document.querySelector(
+              'a.tomtomAttribution'
+            )
             if (attributionLink) {
               // Asignar rel="nofollow" antes de eliminarlo
               attributionLink.setAttribute('rel', 'nofollow')

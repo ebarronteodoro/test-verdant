@@ -152,7 +152,7 @@ export default async function Home () {
 
       <TestimonialsSection></TestimonialsSection>
 
-      <MapSection></MapSection>
+      <MapSection tomtom_apikey={process.env.MAP_APIKEY}></MapSection>
 
       <TimeLine></TimeLine>
 

@@ -85,40 +85,34 @@
           list-style-type: none;
 
           > li {
-            > ul {
-              list-style-type: none;
+            padding: 0.5rem 1rem;
 
-              > li {
-                > .nav-link-button {
-                  padding: 0.5rem 1rem;
-                  color: white;
-                  text-align: center;
-                  font-size: 1rem;
-                  display: flex;
-                  align-items: center;
-                  white-space: nowrap;
+            > .nav-link-button {
+              color: white;
+              text-align: center;
+              font-size: 1rem;
+              display: flex;
+              align-items: center;
+              white-space: nowrap;
 
-                  &.clickable {
-                    color: #99e775;
-                  }
+              &.clickable {
+                color: #99e775;
+              }
 
-                  &.active {
-                    color: #aae7c3;
-                    display: none;
-                    text-align: left;
+              &.active {
+                color: #aae7c3;
+                display: none;
+                text-align: left;
 
-                    &:hover {
-                      color: #97e15b;
-                      background: #033f35;
-                      border-radius: 35px;
-                    }
-                  }
+                &:hover {
+                  color: #97e15b;
+                  background: #033f35;
+                  border-radius: 35px;
                 }
               }
             }
 
             > .nav-link-button {
-              padding: 1rem;
               color: white;
               text-align: center;
               font-size: 1rem;

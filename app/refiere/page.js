@@ -1,4 +1,5 @@
 import Layout from '../Layouts/layout'
+import LoadingOverlay from '../components/LoadingOverlay'
 import RefiereForm from '../components/RefiereForm'
 import '../styles/refiere.css'
 import Image from 'next/image'
@@ -13,6 +14,7 @@ export const metadata = {
 export default function Page () {
   return (
     <Layout>
+      <LoadingOverlay />
       <section className='info-section'>
         <div className='info-section__container'>
           <div className='info-section__title'>

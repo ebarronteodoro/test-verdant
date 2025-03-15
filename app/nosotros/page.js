@@ -1,7 +1,6 @@
 import Layout from "../Layouts/layout";
-import dynamic from "next/dynamic";
+import LoadingOverlay from "../components/LoadingOverlay";
 import "../styles/nosotros.css";
-import Head from "next/head";
 import PilaresSection from "../components/PilaresSection";
 import BrandsSection from "../components/BrandsSection";
 import TeamSection from "../components/TeamSection";
@@ -23,6 +22,7 @@ export const metadata = {
 export default function Home() {
   return (
     <Layout>
+      <LoadingOverlay />
       <section className="title-section">
         <picture>
           <Image
@@ -52,7 +52,6 @@ export default function Home() {
           <path d="m6 9 6 6 6-6"></path>
         </svg>
       </section>
-
       <section className="description-section">
         <span>Nosotros</span>
         <h3>

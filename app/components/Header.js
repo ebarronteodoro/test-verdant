@@ -96,7 +96,7 @@ export default function Header () {
           </picture>
         </Link>
         <div className='right-section'>
-          {pathname.startsWith('/proyectos/') && (
+          {pathname.startsWith('/venta-departamentos/') && (
             <Link className='btn-cotizar' href='#cotiza' id='btn-cotizar'>
               Cotiza tu depa
             </Link>
@@ -118,7 +118,7 @@ export default function Header () {
                 </Link>
               </li>
               <li>
-                <Link href='/proyectos' className='nav-link-button clickable'>
+                <Link href='/venta-departamentos' className='nav-link-button'>
                   Proyectos
                 </Link>
               </li>
