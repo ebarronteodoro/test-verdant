@@ -1,10 +1,169 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "../styles/components/contactForm.css";
 
 export default function ContactForm({ param }) {
+  useEffect(() => {
+    const form = document.getElementById("contactForm");
+    if (form) {
+      form.addEventListener("submit", async function (event) {
+        try {
+          event.preventDefault();
+
+          const json_data = validarFormulario();
+          if (json_data === false) {
+            return;
+          }
+
+          console.log("Datos validados:", json_data);
+          console.log("enviado");
+          form.reset();
+        } catch (error) {
+          console.error("Error inesperado:", error);
+          alert("Ocurrió un error inesperado. Por favor, intenta nuevamente.");
+        }
+      });
+
+      // Función de validación de los campos del formulario
+      function validarFormulario() {
+        var nombre = document.getElementById("nombre").value.trim();
+        var apellido = document.getElementById("apellido").value.trim();
+        var proyecto = document.getElementById("proyecto").value.trim();
+        var tipoDocumento = document
+          .getElementById("tipo_documento")
+          .value.trim();
+        var dni = document.getElementById("dni").value.trim();
+        var telefono = document.getElementById("telefono").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var mensaje = document.getElementById("mensaje").value.trim();
+
+        var regexLetras = /^[A-Za-zÀ-ÿ\s]+$/;
+        var regexNumeros = /^[0-9]+$/;
+        var regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var regexMensaje = /^[A-Za-zÀ-ÿ0-9\s.,;:()¿?¡!'"%-]*$/;
+
+        if (nombre.length > 50 || !regexLetras.test(nombre)) {
+          alert(
+            "El nombre no debe exceder los 50 caracteres y solo debe contener letras y espacios."
+          );
+          return false;
+        }
+        if (apellido.length > 50 || !regexLetras.test(apellido)) {
+          alert(
+            "El apellido no debe exceder los 50 caracteres y solo debe contener letras y espacios."
+          );
+          return false;
+        }
+        if (proyecto === "") {
+          alert("Debe seleccionar un proyecto de interés.");
+          return false;
+        }
+        if (tipoDocumento === "") {
+          alert("Debe seleccionar un tipo de documento.");
+          return false;
+        }
+        if (
+          tipoDocumento === "1" &&
+          (dni.length !== 8 || !regexNumeros.test(dni))
+        ) {
+          alert("El DNI debe tener exactamente 8 dígitos numéricos.");
+          return false;
+        }
+        if (
+          tipoDocumento === "4" &&
+          (dni.length < 9 || dni.length > 11 || !regexNumeros.test(dni))
+        ) {
+          alert(
+            "El Carnet de Extranjería debe tener entre 9 y 11 dígitos numéricos."
+          );
+          return false;
+        }
+        if (telefono.length > 21 || !regexNumeros.test(telefono)) {
+          alert(
+            "El teléfono no debe exceder los 21 caracteres y solo debe contener números."
+          );
+          return false;
+        }
+        if (!regexEmail.test(email)) {
+          alert("Ingrese un correo electrónico válido.");
+          return false;
+        }
+        if (mensaje.length > 150 || !regexMensaje.test(mensaje)) {
+          alert(
+            "El mensaje no debe exceder los 150 caracteres y no debe contener caracteres no permitidos."
+          );
+          return false;
+        }
+
+        return {
+          IdTipoPortal: 10,
+          IdProyecto: parseInt(proyecto, 10),
+          IdTipoDocumento: parseInt(tipoDocumento, 10),
+          NroDocumento: dni,
+          Nombres: nombre,
+          Apellidos: apellido,
+          Correo: email,
+          Celular: telefono,
+          Comentario: mensaje,
+          IncluyeUtm: false,
+        };
+      }
+
+      const inputsAndSelectsAndTextareas = document.querySelectorAll(
+        ".contact-form__form input, .contact-form__form select, .contact-form__form textarea"
+      );
+
+      inputsAndSelectsAndTextareas.forEach((element) => {
+        element.addEventListener("focus", () => {
+          const parentDiv = element.closest(".contact-form__section");
+          if (parentDiv) {
+            parentDiv.classList.add("inFocus");
+          }
+        });
+
+        element.addEventListener("blur", () => {
+          const parentDiv = element.closest(".contact-form__section");
+          if (parentDiv) {
+            parentDiv.classList.remove("inFocus");
+          }
+        });
+
+        // Para detectar cambios en un input, textarea o select
+        element.addEventListener("input", () => {
+          const parentDiv = element.closest(".contact-form__section");
+          if (parentDiv) {
+            if (
+              element.value.trim() !== "" ||
+              (element.tagName.toLowerCase() === "select" &&
+                element.selectedIndex !== 0)
+            ) {
+              parentDiv.classList.add("filled");
+            } else {
+              parentDiv.classList.remove("filled");
+            }
+          }
+        });
+
+        // Para el evento 'change' en el select
+        if (element.tagName.toLowerCase() === "select") {
+          element.addEventListener("change", () => {
+            const parentDiv = element.closest(".contact-form__section");
+            if (parentDiv) {
+              if (element.value.trim() !== "" || element.selectedIndex !== 0) {
+                parentDiv.classList.add("filled");
+              } else {
+                parentDiv.classList.remove("filled");
+              }
+            }
+          });
+        }
+      });
+    }
+  }, []);
+
   return (
     <>
       <section className="contact-form">
@@ -39,7 +198,6 @@ export default function ContactForm({ param }) {
           </div>
 
           <div className="contact-form__form-wrapper">
-            {/* <form className="contact-form__form" action="includes/process_form_89234.php" method="post" onSubmit="return validarFormulario();"> */}
             <form
               className="contact-form__form"
               action=""

@@ -1023,7 +1023,7 @@ main {
           position: relative;
 
           & .swiper-button-next:after {
-            content: '';
+            content: "";
             display: block;
             width: 50px;
             min-width: 50px;
@@ -1036,7 +1036,7 @@ main {
           }
 
           & .swiper-button-prev:after {
-            content: '';
+            content: "";
             display: block;
             width: 50px;
             min-width: 50px;
@@ -1611,7 +1611,7 @@ main {
     .popup-content {
       text-decoration: none;
       text-align: center;
-      font-family: Arial, sans-serif;
+      font-family: "Poppins";
       position: relative;
       height: 100%;
       display: block;
@@ -1880,7 +1880,7 @@ main {
           }
 
           &::before {
-            content: '';
+            content: "";
             width: 100%;
             height: 50%;
             background-image: -webkit-linear-gradient(
@@ -1974,7 +1974,7 @@ main {
       }
 
       &::before {
-        content: '';
+        content: "";
         width: 100%;
         height: 50%;
         background-image: -webkit-linear-gradient(

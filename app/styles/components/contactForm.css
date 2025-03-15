@@ -120,6 +120,7 @@
               z-index: 10;
               background: transparent;
               font-size: 0.8rem;
+              color: black;
 
               &:focus ~ label span {
                 font-size: 10px;
