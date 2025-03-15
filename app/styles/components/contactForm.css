@@ -108,6 +108,7 @@
             & .contact-form__input,
             .contact-form__select,
             .contact-form__textarea {
+              font-family: Poppins, sans-serif;
               width: 100%;
               padding: 0 10px;
               position: absolute;
