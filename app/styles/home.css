@@ -754,7 +754,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins";
 
     & .days-number {
       color: #033f35;
@@ -830,7 +830,7 @@ body {
     .top,
     .bottom-back {
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         z-index: -1;
         left: 0;
@@ -863,7 +863,7 @@ body {
       line-height: 50px;
 
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         display: block;
         top: 0;
@@ -1173,7 +1173,7 @@ width: 100%;
     margin-bottom: 1.5em;
 
     &:first-of-type .circle::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 1px;
       /* Ajusta para alinear verticalmente */

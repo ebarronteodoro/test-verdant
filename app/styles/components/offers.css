@@ -57,7 +57,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins";
 
     & .days-number {
       color: #033f35;
