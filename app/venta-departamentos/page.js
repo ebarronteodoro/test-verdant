@@ -16,6 +16,7 @@ export const metadata = {
 }
 
 export default function Home () {
+  console.log(process.env.MAP_APIKEY)
   return (
     <Layout>
       <LoadingOverlay />
