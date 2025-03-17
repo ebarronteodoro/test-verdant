@@ -1,14 +1,11 @@
-// app/api/contact/route.js
-import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-export async function POST (req) {
+export async function POST(req) {
   try {
-    const body = await req.json()
-    // Extraemos los datos enviados desde el formulario.
-    // Asegúrate de que los nombres coincidan con los que envías desde el front-end.
+    const body = await req.json();
     const {
       Nombres,
       Apellidos,
@@ -17,10 +14,10 @@ export async function POST (req) {
       NroDocumento,
       Correo,
       Celular,
-      Comentario
-    } = body
+      Comentario,
+    } = body;
 
-    // Validación básica: verifica que todos los campos requeridos existan
+    // Validación básica
     if (
       !Nombres ||
       !Apellidos ||
@@ -34,22 +31,22 @@ export async function POST (req) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Uno o más campos son inválidos o están vacíos.'
+          error: "Uno o más campos son inválidos o están vacíos.",
         },
         { status: 400 }
-      )
+      );
     }
 
-    // Verifica si el proyecto (building) existe
+    // Verifica si el proyecto existe
     const building = await prisma.building.findUnique({
-      where: { id: Number(IdProyecto) }
-    })
+      where: { id: Number(IdProyecto) },
+    });
 
     if (!building) {
       return NextResponse.json(
-        { success: false, error: 'El proyecto no existe.' },
+        { success: false, error: "El proyecto no existe." },
         { status: 400 }
-      )
+      );
     }
 
     // Inserta la información en la tabla lead_general
@@ -62,19 +59,89 @@ export async function POST (req) {
         num_document: NroDocumento,
         email: Correo,
         phone: Celular,
-        message: Comentario
+        message: Comentario,
+      },
+    });
+
+    // Preparamos el payload para Elastic Email
+    const emailPayload = {
+      Recipients: [
+        {
+          Email: process.env.SMTP_DESTINATION_EMAIL,
+        },
+      ],
+      Content: {
+        Body: [
+          {
+            ContentType: "PlainText",
+            Content: `
+Se ha recibido un nuevo formulario con los siguientes datos:
+Nombres: ${Nombres}
+Apellidos: ${Apellidos}
+Correo: ${Correo}
+Teléfono: ${Celular}
+Comentario: ${Comentario}
+            `,
+          },
+        ],
+        Subject: "Nuevo formulario recibido",
+        From: process.env.SMTP_FROM_EMAIL,
+        FromName: "Formulario Contacto",
+      },
+      MessageStream: "outbound", // Verifica que este valor sea el correcto en tu cuenta
+    };
+
+    // Registra el payload para depuración
+    console.log(
+      "Payload enviado a Elastic Email:",
+      JSON.stringify(emailPayload, null, 2)
+    );
+
+    // Envía el correo usando la API de Elastic Email (v4)
+    const emailResponse = await fetch(
+      "https://api.elasticemail.com/v4/emails",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-ElasticEmail-ApiKey": process.env.ELASTICEMAIL_API_KEY,
+        },
+        body: JSON.stringify(emailPayload),
       }
-    })
+    );
+
+    // Verifica la respuesta del envío del email
+    if (!emailResponse.ok) {
+      let errorData;
+      const responseText = await emailResponse.text();
+      if (responseText) {
+        try {
+          errorData = JSON.parse(responseText);
+        } catch (jsonError) {
+          errorData = responseText;
+        }
+      } else {
+        errorData = "No se devolvió contenido en la respuesta.";
+      }
+      console.error("Error al enviar email:", errorData);
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Error al enviar el correo electrónico.",
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
-      message: 'Formulario enviado correctamente.'
-    })
+      message: "Formulario enviado correctamente.",
+    });
   } catch (error) {
-    console.error('Error en API contact:', error)
+    console.error("Error en API contact:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
-    )
+    );
   }
 }
