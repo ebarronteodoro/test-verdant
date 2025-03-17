@@ -58,10 +58,10 @@ export default function Footer () {
           <h3 className='footer__title'>Nosotros</h3>
           <ul className='footer__list'>
             <li className='footer__list-item'>
-              <Link href='proyectos'>Proyectos</Link>
+              <Link href='/venta-departamentos'>Proyectos</Link>
             </li>
             <li className='footer__list-item'>
-              <Link href='refiere'>Refiere y gana</Link>
+              <Link href='/refiere'>Refiere y gana</Link>
             </li>
             {/* <li className="footer__list-item"><Link href="novedades">Novedades</Link></li> */}
           </ul>

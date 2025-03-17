@@ -37,10 +37,10 @@ export default async function Home () {
             <strong>¡Conversemos ahora!</strong>
           </div>
           <div className='cta-buttons'>
-            <Link href='proyectos' className='btn btn-outline'>
+            <Link href='/venta-departamentos' className='btn btn-outline'>
               Ir a Proyectos
             </Link>
-            <Link href='contacto' className='btn btn-solid'>
+            <Link href='/contacto' className='btn btn-solid'>
               Contactar
             </Link>
           </div>
@@ -53,7 +53,7 @@ export default async function Home () {
             <span>NOSOTROS</span>
             <h2>Estamos altamente comprometidos contigo y con el planeta</h2>
             <p>Nos dedicamos a construir futuros más sostenibles</p>
-            <Link href='nosotros'>Conócenos</Link>
+            <Link href='/nosotros'>Conócenos</Link>
           </div>
           <div className='nosotros-img'>
             <div className='nosotros-img__1'>

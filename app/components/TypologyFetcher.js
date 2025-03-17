@@ -128,6 +128,8 @@ export default function TypologyFetcher({ projectId }) {
 
     // Obtener valores y recortar espacios
     const typology = typologyInput.value.trim();
+    // Agrega esta línea para obtener el texto de la opción seleccionada:
+    const typologyText = typologyInput.options[typologyInput.selectedIndex].text.trim();
     const first_name = nombreInput.value.trim();
     const last_name = apellidoInput.value.trim();
     const phone = telefonoInput ? telefonoInput.value.trim() : null;
@@ -209,7 +211,8 @@ export default function TypologyFetcher({ projectId }) {
         IncluyeUtm: false,
       },
       mailer: {
-        typology,
+        // Usamos el texto de la tipología en lugar de su id
+        typology: typologyText,
         first_name,
         last_name,
         phone,

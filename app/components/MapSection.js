@@ -158,7 +158,7 @@ export default function MapSection ({ tomtom_apikey }) {
             <h2>
               Descubre el proyecto <span>perfecto para ti</span>
             </h2>
-            <a href='proyectos'>Ver Proyectos</a>
+            <a href='/venta-departamentos'>Ver Proyectos</a>
           </div>
           <div className='map-container'>
             <div id='map' className='layer_back'>

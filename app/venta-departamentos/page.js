@@ -64,7 +64,7 @@ export default function Home () {
         </h1>
         <ProjectsSection param='proyectos' />
       </section>
-      <TimeLine></TimeLine>
+      <TimeLine param='proyectos'></TimeLine>
       <MapSection tomtom_apikey={process.env.MAP_APIKEY}></MapSection>
       <DontGoComponent variant='standard' />
     </Layout>

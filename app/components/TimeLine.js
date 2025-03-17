@@ -1,49 +1,51 @@
-"use client";
+'use client'
 
 import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import "../styles/components/timeline.css";
 
 export default function TimeLine({ param }) {
+  const pathname = usePathname();
+
   useEffect(() => {
-    // Funciones del script
     let ascend_crono = true;
 
     function timelineMobile() {
       if (window.innerWidth <= 560) {
         if (ascend_crono) {
-          const container = document.querySelector(
-            ".buildings_cards_container"
-          );
-          const cards = Array.from(
-            container.querySelectorAll(".building_card")
-          );
+          const container = document.querySelector(".buildings_cards_container");
+          if (container) {
+            const cards = Array.from(
+              container.querySelectorAll(".building_card")
+            );
 
-          // Reordenar las tarjetas
-          cards.forEach((card) => container.removeChild(card));
-          cards.reverse().forEach((card) => container.appendChild(card));
+            // Reordenar las tarjetas
+            cards.forEach((card) => container.removeChild(card));
+            cards.reverse().forEach((card) => container.appendChild(card));
 
-          // Mostrar solo los dos primeros y ocultar el resto
-          cards.forEach((card, index) => {
-            card.style.display = index < 2 ? "flex" : "none";
-          });
+            // Mostrar solo los dos primeros y ocultar el resto
+            cards.forEach((card, index) => {
+              card.style.display = index < 2 ? "flex" : "none";
+            });
+          }
           ascend_crono = false;
         }
       } else {
         if (!ascend_crono) {
-          const container = document.querySelector(
-            ".buildings_cards_container"
-          );
-          const cards = Array.from(
-            container.querySelectorAll(".building_card")
-          );
-          cards.forEach((card) => container.removeChild(card));
-          cards.reverse().forEach((card) => container.appendChild(card));
+          const container = document.querySelector(".buildings_cards_container");
+          if (container) {
+            const cards = Array.from(
+              container.querySelectorAll(".building_card")
+            );
+            cards.forEach((card) => container.removeChild(card));
+            cards.reverse().forEach((card) => container.appendChild(card));
 
-          cards.forEach((card) => {
-            card.style.display = "flex";
-          });
+            cards.forEach((card) => {
+              card.style.display = "flex";
+            });
+          }
           ascend_crono = true;
         }
       }
@@ -51,9 +53,9 @@ export default function TimeLine({ param }) {
 
     function verificarOverflow() {
       const elemento = document.querySelector(".top_section");
-      if (!elemento) return; // Verifica que exista el elemento
+      if (!elemento) return;
 
-      // Detectar si hay overflow (aquí se utiliza un ancho fijo de 1200px)
+      // Se asume un ancho fijo de 1200px
       let anchocaja = 1200;
       let tieneOverflow = anchocaja > elemento.clientWidth;
 
@@ -64,18 +66,18 @@ export default function TimeLine({ param }) {
       if (ancho_pantalla <= 560) {
         if (!elemento.classList.contains("no-bg")) {
           elemento.classList.add("no-bg");
-          next_button.style.display = "none";
-          prev_button.style.display = "none";
+          if(next_button) next_button.style.display = "none";
+          if(prev_button) prev_button.style.display = "none";
         }
       } else {
         if (!tieneOverflow) {
           elemento.classList.add("no-bg");
-          next_button.style.display = "none";
-          prev_button.style.display = "none";
+          if(next_button) next_button.style.display = "none";
+          if(prev_button) prev_button.style.display = "none";
         } else {
           elemento.classList.remove("no-bg");
-          next_button.style.display = "flex";
-          prev_button.style.display = "flex";
+          if(next_button) next_button.style.display = "flex";
+          if(prev_button) prev_button.style.display = "flex";
         }
       }
     }
@@ -109,16 +111,36 @@ export default function TimeLine({ param }) {
 
       if (prevButton && nextButton && container) {
         prevButton.addEventListener("click", () => {
-          smoothScroll(container, "left", 220, 0);
+          smoothScroll(container, "left", 220, 300);
         });
 
         nextButton.addEventListener("click", () => {
-          smoothScroll(container, "right", 220, 0);
+          smoothScroll(container, "right", 220, 300);
         });
       }
     }
 
-    // Como useEffect se ejecuta en el cliente, no es necesario esperar al DOMContentLoaded
+    // Configuración del botón "Ver más"
+    const seeMoreButton = document.getElementById("seemore");
+    const handleSeeMore = () => {
+      const container = document.querySelector(".buildings_cards_container");
+      if (container) {
+        const cards = Array.from(container.querySelectorAll(".building_card"));
+        const hiddenCards = cards.some((card) => card.style.display === "none");
+
+        if (hiddenCards) {
+          cards.forEach((card) => (card.style.display = "block"));
+          if (seeMoreButton && seeMoreButton.parentElement)
+            seeMoreButton.parentElement.style.display = "none";
+        }
+      }
+    };
+
+    if (seeMoreButton) {
+      seeMoreButton.addEventListener("click", handleSeeMore);
+    }
+
+    // Llamar funciones al cargar
     verificarOverflow();
     controlesScrollTimeline();
     timelineMobile();
@@ -128,31 +150,15 @@ export default function TimeLine({ param }) {
     window.addEventListener("resize", timelineMobile);
     window.addEventListener("load", timelineMobile);
 
-    // Configuración del botón "Ver más"
-    const seeMoreButton = document.getElementById("seemore");
-    if (seeMoreButton) {
-      seeMoreButton.addEventListener("click", () => {
-        const container = document.querySelector(".buildings_cards_container");
-        const cards = Array.from(container.querySelectorAll(".building_card"));
-        const hiddenCards = cards.some((card) => card.style.display === "none");
-
-        if (hiddenCards) {
-          cards.forEach((card) => (card.style.display = "block"));
-          seeMoreButton.parentElement.style.display = "none";
-        }
-      });
-    }
-
-    // Limpieza de los eventos al desmontar el componente
     return () => {
       window.removeEventListener("resize", verificarOverflow);
       window.removeEventListener("resize", timelineMobile);
       window.removeEventListener("load", timelineMobile);
       if (seeMoreButton) {
-        seeMoreButton.removeEventListener("click", () => {});
+        seeMoreButton.removeEventListener("click", handleSeeMore);
       }
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <>
@@ -270,7 +276,7 @@ export default function TimeLine({ param }) {
             {param === "proyectos" ? (
               <button id="seemore">Ver más</button>
             ) : (
-              <a href="proyectos">Ver más</a>
+              <a href="/venta-departamentos">Ver más</a>
             )}
           </div>
 
