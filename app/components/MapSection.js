@@ -16,7 +16,7 @@ export default function MapSection ({ tomtom_apikey }) {
       if (typeof tt !== 'undefined') {
         try {
 
-          const apiKey = tomtom_apikey
+          const apiKey = '302A7dGt1V6VAOSYg7ERJX2hcMqosebt'
           let zoom_number = window.innerWidth < 700 ? 10 : 11
 
           const map = tt.map({
