@@ -46,7 +46,7 @@ const projects = [
   {
     id: 'seed',
     name: 'SEED',
-    brochure_path: '/brochures/brochure-soil.pdf',
+    brochure_path: '/brochures/brochure-seed.pdf',
     title: 'Seed Growing Home',
     location: 'SURCO',
     address: 'Jr. República de Líbano 173',
