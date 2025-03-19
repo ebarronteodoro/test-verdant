@@ -302,7 +302,7 @@ main {
                 }
 
                 &::after {
-                  content: '';
+                  content: "";
                   position: absolute;
                   right: 10px;
                   top: 50%;
@@ -527,7 +527,7 @@ main {
                   display: block;
                   width: fit-content;
                   /* margin-left: auto; */
-                  margin-right: auto;
+                  margin: 0 auto;
                   transition: all 0.3s ease;
                   font-size: 1rem;
                   white-space: nowrap;
@@ -951,6 +951,7 @@ main {
 
                   & > button {
                     font-size: clamp(0.75rem, 1.25vw, 0.85rem);
+                    margin-left: 0;
                   }
                 }
 
@@ -1006,6 +1007,20 @@ main {
           /* z-index: -10; */
           width: 100%;
           height: auto;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 427px) {
+  main {
+    & .contact-section {
+      & .contact-info {
+        .info-container {
+          & > div {
+            margin: 0 auto;
+          }
         }
       }
     }

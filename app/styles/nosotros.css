@@ -13,7 +13,7 @@ main {
     position: relative;
 
     &::before {
-      content: '';
+      content: "";
       width: 100%;
       height: 50%;
       background-image: -webkit-linear-gradient(
@@ -502,7 +502,7 @@ main {
           color: #033f35;
           font-weight: 500;
           line-height: 1.2;
-          font-size: 1rem;
+          font-size: clamp(0.5rem, 3vw, 1rem);
           margin-top: 0.8rem;
         }
 
