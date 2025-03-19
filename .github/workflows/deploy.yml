@@ -3,7 +3,7 @@ name: Deploy via FTP
 on:
   push:
     branches:
-      - master  # Cambia la rama según tu preferencia
+      - master
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          server-dir: /
+          server-dir: public_html/
           exclude: |
             .git
             .github
