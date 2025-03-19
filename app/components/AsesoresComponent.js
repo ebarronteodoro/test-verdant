@@ -43,7 +43,7 @@ export default function AsesoresSection({ project }) {
         {project.id === "seed" && (
           <>
             <AsesorCard
-              imgSrc="/asesores/ASESORES SEED/César_Chumán_-_Asesor_SEED_(editado).png"
+              imgSrc="/asesores/ASESORES SEED/Cesar_Chuman_-_Asesor_SEED_(editado).png"
               alt="Asesor César Chumán"
               name="Cesar Chuman"
               cargo="Asesor de Ventas"
