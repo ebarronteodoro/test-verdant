@@ -102,12 +102,6 @@ Referido:
       MessageStream: "outbound", // Verifica que este valor sea el correcto en tu cuenta
     };
 
-    // Registra el payload para depuración
-    // console.log(
-    //   "Payload enviado a Elastic Email:",
-    //   JSON.stringify(emailPayload, null, 2)
-    // );
-
     // Enviar el correo usando la API de Elastic Email (v4)
     const emailResponse = await fetch(
       "https://api.elasticemail.com/v4/emails",

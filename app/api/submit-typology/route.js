@@ -166,7 +166,6 @@ export async function POST(request) {
 
     let emailResult = {};
     const rawEmailText = await emailResponse.text();
-    // console.log(emailResponse);
     try {
       emailResult = JSON.parse(rawEmailText);
     } catch (error) {

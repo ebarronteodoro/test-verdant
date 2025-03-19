@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /novedades
+Disallow: /details.php
+Disallow: /details
+
+# Host
+Host: https://verdant.pe/

@@ -17,12 +17,24 @@ import 'swiper/css/thumbs'
 import 'swiper/css/free-mode'
 import Masonry from 'react-masonry-css'
 import path from 'path'
+import CloseIcon from './icons/CloseIcon'
 
 const GallerySectionClient = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null) // Nuevo estado para la imagen seleccionada
 
   const getImageName = imagePath => {
     return path.parse(imagePath).name
+  }
+
+  // Función para manejar el clic en una imagen y mostrarla en detalle
+  const handleImageClick = image => {
+    setSelectedImage(image)
+  }
+
+  // Función para cerrar la imagen detallada
+  const closeImageModal = () => {
+    setSelectedImage(null)
   }
 
   return (
@@ -49,7 +61,6 @@ const GallerySectionClient = ({ images }) => {
           autoplay={{ delay: 100000, disableOnInteraction: false }}
           loop
           spaceBetween={10}
-          // Ajustamos loopedSlides directamente en el callback onSwiper
           thumbs={{ swiper: thumbsSwiper }}
         >
           {images.map((image, index) => (
@@ -88,6 +99,7 @@ const GallerySectionClient = ({ images }) => {
                 width={300}
                 height={120}
                 loading='lazy'
+                onClick={() => handleImageClick(image)} // Manejador de clic
               />
               <h3>{getImageName(image).replace(/_/g, ' ')}</h3>
             </SwiperSlide>
@@ -95,13 +107,28 @@ const GallerySectionClient = ({ images }) => {
         </Swiper>
       </div>
 
-      {/* Swiper de miniaturas */}
-      <div className='thumbs-swiper'></div>
+      {/* Modal para ver la imagen en detalle */}
+      {selectedImage && (
+        <div className='image-modal' onClick={closeImageModal}>
+          <div className='modal-content' onClick={e => e.stopPropagation()}>
+            <Image
+              src={selectedImage}
+              alt='Imagen detallada'
+              width={800}
+              height={600}
+              loading='lazy'
+            />
+            <h3>{getImageName(selectedImage).replace(/_/g, ' ')}</h3>{' '}
+            <span className='close-modal' onClick={closeImageModal}>
+              <CloseIcon />
+            </span>{' '}
+          </div>
+        </div>
+      )}
 
-      {/* Galería estilo Pinterest con Masonry para móvil */}
       <div id='gallery' className='justified-gallery'>
         <Masonry
-          breakpointCols={2} // Siempre 2 columnas en móvil
+          breakpointCols={2}
           className='masonry-grid'
           columnClassName='masonry-column'
         >
@@ -111,6 +138,7 @@ const GallerySectionClient = ({ images }) => {
               className={`gallery-item ${
                 index % 5 === 0 ? 'single-column' : ''
               }`}
+              onClick={() => handleImageClick(image)} // Manejador de clic en las imágenes de la galería
             >
               <Image
                 src={image}

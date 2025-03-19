@@ -128,7 +128,6 @@ export default function RefiereForm () {
           })
           const result = await response.json()
           if (result.success) {
-            console.log('Datos guardados correctamente:', result)
             alert('¡Formulario enviado correctamente!')
             form.reset()
           } else {

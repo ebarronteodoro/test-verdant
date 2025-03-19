@@ -12,8 +12,6 @@ export default function ContactFormScript () {
         const json_data = validarFormulario()
         if (!json_data) return
 
-        console.log('enviado', json_data)
-
         try {
           const response = await fetch('/api/contact_form', {
             method: 'POST',
@@ -22,7 +20,6 @@ export default function ContactFormScript () {
           })
           const result = await response.json()
           if (result.success) {
-            console.log('Datos guardados correctamente:', result)
             alert('¡Formulario enviado correctamente!')
             form.reset()
           } else {
